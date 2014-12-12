@@ -1,0 +1,17 @@
+{% extends "accounts/base.html" %}
+
+{% block content %}
+    <form class="register-form" method="post" action="/accounts/register">
+    {{ form.non_field_errors }}
+    {% csrf_token %}
+        {% for field in form %}
+            <div class="field-wrapper">
+                {{ field.errors }}
+                {{ field.label_tag }}{{ field }}
+            </div>
+        {% endfor %}
+        <div class="submit-wrapper">
+            <input type="submit" value="Register">
+        </div>
+    </form>
+{% endblock %}
