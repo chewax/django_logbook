@@ -92,13 +92,4 @@ STATICFILES_DIRS = (
     '/var/www/static/',
 )
 
-# Login Redirection
-# LOGIN_REDIRECT_URL = reverse_lazy('pages:home')
-# LOGIN_URL = reverse_lazy('login')
-# LOGOUT_URL = reverse_lazy('logout')
-
-LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = '/'
-LOGOUT_URL = '/'
-
 AUTH_USER_MODEL = 'accounts.User'

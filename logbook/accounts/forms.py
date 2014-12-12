@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from accounts.models import User
 
 
@@ -14,3 +14,8 @@ class RegisterUserForm(UserCreationForm):
             "first_name", "last_name", "email", "username", "password1",
             "password2",
         )
+
+class AuthenticateUserForm(AuthenticationForm):
+
+    def confirm_login_allowed(self, user):
+        pass
