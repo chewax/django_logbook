@@ -38,7 +38,7 @@ class RegisterUserView(FormView):
         # Register the new user
         user = form.save()
 
-        # Once it is registered it must be loged in
+        # Once it is registered it must be logged in
         # we can't take the password from the user.password because it is
         # hashed. The username is OK but is taken from the form for consistency
         username = self.request.POST['username']
