@@ -1,17 +1,3 @@
-/*.login-card{*/
-    /*display: block;*/
-    /*padding: 30px 45px;*/
-    /*background: #d7eaff;*/
-    /*right: 100%;*/
-    /*left: 100%;*/
-    /*height: 70%;*/
-    /*min-width: 20em;*/
-    /*max-width: 23em;*/
-    /*min-height: 25em;*/
-    /*max-height: 30em;*/
-
-/*}*/
-
 .login-wrapper{
     max-width: 440px;
     padding: 10% 4%;
@@ -32,10 +18,6 @@
         right: 100%;
         left: 100%;
         height: 70%;
-        /*min-width: 20em;*/
-        /*max-width: 23em;*/
-        /*min-height: 25em;*/
-        /*max-height: 30em;*/
   }
 }
 
