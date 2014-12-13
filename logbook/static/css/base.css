@@ -1,4 +1,37 @@
-.top-menu{
-    background-color: #ff6f6b;
-    border: dashed;
+/*.top-menu{*/
+    /*background-color: #ff6f6b;*/
+    /*border: dashed;*/
+    /*min-height: 3em;*/
+/*}*/
+
+@media screen and (min-width: 20.5em) {
+    .top-menu {
+        width: 100%;
+        float: left;
+        background-color: #ff6f6b;
+        border: dashed;
+        min-height: 6em;
+        /*display: table;*/
+        /*table-layout: fixed;*/
+    }
 }
+
+
+@media screen and (min-width: 20.5em) {
+    .content {
+        width: 100%;
+        height: 100%;
+        float: left;
+        background-color: #20ff11;
+        border: dashed;
+        min-height: 6em;
+        /*display: table;*/
+        /*table-layout: fixed;*/
+    }
+}
+
+/*.user-box{*/
+    /*display:table-cell;*/
+    /*vertical-align:middle;*/
+    /*text-align:center;*/
+/*}*/

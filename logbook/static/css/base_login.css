@@ -1,0 +1,32 @@
+/*Display 3 per row for medium displays (like mobile phones in landscape or smaller tablets)*/
+@media screen and (min-width: 20.5em) {
+  .login-card{
+      height: 50%;
+      padding: 1em;
+      background: #d7eaff;
+      margin-left: 10%;
+      margin-right: 10%;
+      margin-top: 20%;
+      max-width: 350px;
+  }
+}
+
+@media screen and (min-width: 40.5em) {
+  .login-card{
+      min-width: 250px;
+      height: 40%;
+      padding: 3em;
+      background: #d7eaff;
+      margin-left: 37%;
+      margin-right: 37%;
+      margin-top: 15%;
+  }
+}
+
+.field {
+    text-align: center;
+}
+.field input{
+    margin-top: 0.25em;
+    width: 90%;
+}

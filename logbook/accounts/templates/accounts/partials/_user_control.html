@@ -1,9 +1,11 @@
-<div class="user-box">
+<div class="user-box pull-right">
     {% if user.is_authenticated %}
-            Welcome {{ user.first_name }} {{ user.last_name }}
+            You are signed in as <a href="/accounts/profile">
+                {{ user.first_name }} {{ user.last_name }}
+            </a> -
             <a href="/logout"> Logout </a>
     {% else %}
-        <a href="/login"> Login </a>
+        <a href="/login"> Login </a> -
         <a href="/accounts/register"> Register </a>
     {% endif %}
 </div>
