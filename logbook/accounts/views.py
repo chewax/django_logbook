@@ -1,4 +1,5 @@
 from django.core.urlresolvers import reverse
+from django.shortcuts import redirect
 from django.views.generic import FormView, TemplateView
 from django.contrib.auth import authenticate, login
 from accounts.forms import RegisterUserForm, AuthenticateUserForm
@@ -7,6 +8,13 @@ class LoginUserView(FormView):
     template_name = 'accounts/login.html'
     form_class = AuthenticateUserForm
     success_url = '/'
+
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        if user.is_authenticated():
+            return redirect('pages:home')
+        else:
+            return super(LoginUserView, self).get(request, *args, **kwargs)
 
     def form_valid(self, form):
         user = form.get_user()
