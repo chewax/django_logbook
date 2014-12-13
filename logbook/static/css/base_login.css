@@ -1,27 +1,59 @@
+/*.login-card{*/
+    /*display: block;*/
+    /*padding: 30px 45px;*/
+    /*background: #d7eaff;*/
+    /*right: 100%;*/
+    /*left: 100%;*/
+    /*height: 70%;*/
+    /*min-width: 20em;*/
+    /*max-width: 23em;*/
+    /*min-height: 25em;*/
+    /*max-height: 30em;*/
+
+/*}*/
+
+.login-wrapper{
+    max-width: 440px;
+    padding: 10% 4%;
+    background-color: rgb(243,243,243);
+    border-radius: 4px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+}
+
+
 /*Display 3 per row for medium displays (like mobile phones in landscape or smaller tablets)*/
 @media screen and (min-width: 20.5em) {
   .login-card{
-      height: 50%;
-      padding: 1em;
-      background: #d7eaff;
-      margin-left: 10%;
-      margin-right: 10%;
-      margin-top: 20%;
-      max-width: 350px;
+        display: block;
+        padding: 30px 45px;
+        background: #d7eaff;
+        right: 100%;
+        left: 100%;
+        height: 70%;
+        /*min-width: 20em;*/
+        /*max-width: 23em;*/
+        /*min-height: 25em;*/
+        /*max-height: 30em;*/
   }
 }
 
 @media screen and (min-width: 40.5em) {
   .login-card{
-      min-width: 250px;
-      height: 40%;
-      padding: 3em;
-      background: #d7eaff;
-      margin-left: 37%;
-      margin-right: 37%;
-      margin-top: 15%;
+      display: block;
+    padding: 30px 45px;
+    background: #d7eaff;
+    right: 100%;
+    left: 100%;
+    height: 70%;
+    min-width: 20em;
+    max-width: 23em;
+    min-height: 25em;
+    max-height: 30em;
   }
 }
+
 
 .field {
     text-align: center;

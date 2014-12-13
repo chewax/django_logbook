@@ -7,23 +7,25 @@
 {% endblock %}
 
 {% block content %}
-<div class="login-card">
-    {% if user.is_authenticated %}
-        Welcome:
-        {{ user.first_name }} {{ user.last_name }}
-        <a href="/logout"> logout </a>
+    <div class="login-wrapper">
+        <div class="login-card">
+        {% if user.is_authenticated %}
+            Welcome:
+            {{ user.first_name }} {{ user.last_name }}
+            <a href="/logout"> logout </a>
 
-    {% else %}
-        <form action="/login" method="post">
-            {% if orm.non_field_errors %}
-                <div class="alert alert-warning" role="alert">{{ form.non_field_errors }}</div>
-            {% endif %}
-            {% csrf_token %}
-            <div class="field">{{ form.username }}</div>
-            <div class="field">{{ form.password }}</div>
-            <a href="/accounts/register">Register</a>
-            <button class="btn btn-default" type="submit">Login</button>
-        </form>
-    {% endif %}
-</div>
+        {% else %}
+            <form action="/login" method="post">
+                {% if orm.non_field_errors %}
+                    <div class="alert alert-warning" role="alert">{{ form.non_field_errors }}</div>
+                {% endif %}
+                {% csrf_token %}
+                <div class="field">{{ form.username }}</div>
+                <div class="field">{{ form.password }}</div>
+                <div><a href="/accounts/register">Register</a></div>
+                <div><button class="btn btn-default" type="submit">Login</button></div>
+            </form>
+        {% endif %}
+        </div>
+    </div>
 {% endblock %}

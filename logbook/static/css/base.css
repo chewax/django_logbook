@@ -11,8 +11,8 @@
         background-color: #ff6f6b;
         border: dashed;
         min-height: 6em;
-        /*display: table;*/
-        /*table-layout: fixed;*/
+        display: table;
+        table-layout: fixed;
     }
 }
 
@@ -25,8 +25,8 @@
         background-color: #20ff11;
         border: dashed;
         min-height: 6em;
-        /*display: table;*/
-        /*table-layout: fixed;*/
+        display: table;
+        table-layout: fixed;
     }
 }
 
