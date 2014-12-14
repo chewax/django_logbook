@@ -1,16 +1,14 @@
 {% load static from staticfiles %}
 
 {% block meta %}
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no,">
 {% endblock %}
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
-    <!-- BOOTSTRAP AND FONTAWESOME -->
-{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">#}
-{#    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">#}
-{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">#}
+    <!-- FONTAWESOME -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 {% endblock %}
 
 <div class="container">
@@ -22,6 +20,5 @@
 </div>
 
 {% block js%}
-    <!-- BOOTSTRAP -->
-{#    <script src="https://maxcdn.bootstrap/cdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>#}
+
 {% endblock %}

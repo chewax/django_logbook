@@ -8,7 +8,7 @@
 
 {% block content %}
     <div class="login-wrapper">
-        <div class="login-card">
+        <div class="login-card ghost-div">
         {% if user.is_authenticated %}
             Welcome:
             {{ user.first_name }} {{ user.last_name }}
@@ -20,10 +20,16 @@
                     <div class="alert alert-warning" role="alert">{{ form.non_field_errors }}</div>
                 {% endif %}
                 {% csrf_token %}
-                <div class="field">{{ form.username }}</div>
-                <div class="field">{{ form.password }}</div>
-                <div><a href="/accounts/register">Register</a></div>
-                <div><button class="btn btn-default" type="submit">Login</button></div>
+{#                <div class="field ghost-input"><div class="label">{{ form.username.label }}</div>{{ form.username }}</div>#}
+{#                <div class="field ghost-input"><div class="label">{{ form.password.label }}</div>{{ form.password }}</div>#}
+                <div class="field ghost-input">{{ form.username.label }}{{ form.username }}</div>
+                <div class="field ghost-input">{{ form.password.label }}{{ form.password }}</div>
+                <div class="field"><button class="ghost-button" type="submit">Login</button></div>
+                <div class="field center">
+                        <a href="/accounts/register"><i class="fa fa-envelope fa-2x margin-left-right-5"></i></a>
+                        <a href="#"><i class="fa fa-twitter fa-2x margin-left-right-5"></i></a>
+                        <a href="#"><i class="fa fa-facebook fa-2x margin-left-right-5"></i></a>
+                </div>
             </form>
         {% endif %}
         </div>

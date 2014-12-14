@@ -1,7 +1,9 @@
 .login-wrapper{
-    max-width: 440px;
-    padding: 10% 4%;
-    background-color: rgb(243,243,243);
+    max-width: 300px;
+    padding-top: 10%;
+    padding-right: 10%;
+    padding-left: 10%;
+    padding-bottom: 10%;
     border-radius: 4px;
     margin-left: auto;
     margin-right: auto;
@@ -9,38 +11,51 @@
 }
 
 
-/*Display 3 per row for medium displays (like mobile phones in landscape or smaller tablets)*/
+/* Small devices like mobile phones portrait*/
 @media screen and (min-width: 20.5em) {
-  .login-card{
-        display: block;
+    .login-card{
+        /*display: block;*/
         padding: 30px 45px;
-        background: #d7eaff;
+        height: 60%;
+  }
+}
+
+/* Regular screens */
+@media screen and (min-width: 40.5em) {
+    .login-card{
+        /*display: block;*/
+        padding: 30px 45px;
         right: 100%;
         left: 100%;
-        height: 70%;
+        height: 200px;
   }
 }
 
-@media screen and (min-width: 40.5em) {
-  .login-card{
-      display: block;
-    padding: 30px 45px;
-    background: #d7eaff;
-    right: 100%;
-    left: 100%;
-    height: 70%;
-    min-width: 20em;
-    max-width: 23em;
-    min-height: 25em;
-    max-height: 30em;
-  }
+.field{
+    margin-bottom: 10px;
 }
 
+.field input {
+    width: 100%;
+    /*height: 2.5em;*/
+}
 
-.field {
+.field button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.field a {
+    font-size: 0.9em;
+    font-style: normal;
+}
+
+.center {
     text-align: center;
 }
-.field input{
-    margin-top: 0.25em;
-    width: 90%;
+
+.margin-left-right-5{
+    margin-left: 5px;
+    margin-right: 5px;
 }
