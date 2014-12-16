@@ -20,10 +20,10 @@
                     <div class="alert alert-warning" role="alert">{{ form.non_field_errors }}</div>
                 {% endif %}
                 {% csrf_token %}
-{#                <div class="field ghost-input"><div class="label">{{ form.username.label }}</div>{{ form.username }}</div>#}
-{#                <div class="field ghost-input"><div class="label">{{ form.password.label }}</div>{{ form.password }}</div>#}
-                <div class="field ghost-input">{{ form.username.label }}{{ form.username }}</div>
-                <div class="field ghost-input">{{ form.password.label }}{{ form.password }}</div>
+{#                <div class="field ghost-input">{{ form.username.label_tag }}{{ form.username }}</div>#}
+{#                <div class="field ghost-input">{{ form.password.label_tag }}{{ form.password }}</div>#}
+                <div class="field ghost-input">{{ form.username }}</div>
+                <div class="field ghost-input">{{ form.password }}</div>
                 <div class="field"><button class="ghost-button" type="submit">Login</button></div>
                 <div class="field center">
                         <a href="/accounts/register"><i class="fa fa-envelope fa-2x margin-left-right-5"></i></a>

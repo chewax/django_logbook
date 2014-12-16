@@ -10,6 +10,6 @@ class FlighLegInline(admin.TabularInline):
 
 class FlightAdmin(admin.ModelAdmin):
     inlines = [FlighLegInline]
-    list_display = ['number', 'get_flight_time']
+    list_display = ['number', 'flight_time']
 
 admin.site.register(Flight, FlightAdmin)

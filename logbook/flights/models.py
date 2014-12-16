@@ -10,7 +10,7 @@ class Flight(models.Model):
         return '{}'.format(self.number)
 
     @property
-    def get_flight_time(self):
+    def flight_time(self):
         """
         Calculates the "flight time" of the flight,
         leaving out the block times.
@@ -24,7 +24,7 @@ class Flight(models.Model):
         return flight_time
 
     @property
-    def get_block_time(self):
+    def block_time(self):
         """
         Calculates the "block time" of the flight.
         :return: timedelta: block_time
@@ -37,7 +37,7 @@ class Flight(models.Model):
         return block_time
 
     @property
-    def get_flight_service_time(self):
+    def flight_service_time(self):
         """
         Calculates the "service time" of the full flight.
         The time before and after the flight that conforms the
