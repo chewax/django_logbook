@@ -5,7 +5,7 @@ from pages.views import HomeView
 
 
 urlpatterns = patterns('',
-    url(r'^logout$', logout, {'next_page': 'pages:home'}, name='logout'),
-    url(r'^login$', LoginUserView.as_view(), name='logout'),
+    url(r'^logout', logout, {'next_page': 'pages:home'}, name='logout'),
+    url(r'^login', LoginUserView.as_view(), name='logout'),
     url(r'^', HomeView.as_view(), name='home'),
 )

@@ -5,6 +5,8 @@ from datetime import timedelta
 
 class Flight(models.Model):
     number = models.CharField(max_length=10, blank=True)
+    flight_origin_ICAO = models.CharField(max_length=4, blank=True, null=True, verbose_name="From")
+    flight_dest_ICAO = models.CharField(max_length=4, blank=True, null=True, verbose_name="To")
 
     def __unicode__(self):
         return '{}'.format(self.number)

@@ -4,7 +4,7 @@ from flights.views import ProcessFlightView
 
 urlpatterns = patterns('',
 
-    url(r'^$', ProcessFlightView.as_view(), name='add_flight'),
+    url(r'^new', ProcessFlightView.as_view(), name='new'),
 
 )
 
