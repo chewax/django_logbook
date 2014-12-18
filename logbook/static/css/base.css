@@ -31,7 +31,6 @@
     -moz-box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.20);
     box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.20);
 
-
     background: rgb(125,185,232); /* Old browsers */
     background: -moz-linear-gradient(45deg,  rgba(125,185,232,1) 0%, rgba(56,140,228,1) 96%); /* FF3.6+ */
     background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(125,185,232,1)), color-stop(96%,rgba(56,140,228,1))); /* Chrome,Safari4+ */
@@ -48,7 +47,7 @@
     outline: none;
     font-size: 1em;
     padding: 10px 30px;
-    border-radius: 5px;
+    border-radius: 3px;
     /*border: 1px solid #cccccc;*/
     font-family: "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
 
@@ -72,6 +71,10 @@
 
 .ghost-button:hover{
     cursor: hand;
+
+    /*-webkit-box-shadow: inset 0px 0px 1px 0px rgba(0,0,0,1);*/
+/*-moz-box-shadow: inset 0px 0px 1px 0px rgba(0,0,0,1);*/
+box-shadow: inset 0px 0px 1px 0px rgba(0,0,0,1);
 }
 
 .ghost-input input:focus {
@@ -123,4 +126,33 @@ a:link{
 
 a:visited{
     color: #343f58;
+}
+
+.field{
+    margin-bottom: 10px;
+}
+
+.field input {
+    width: 100%;
+    /*height: 2.5em;*/
+}
+
+.field button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.field a {
+    font-size: 0.9em;
+    font-style: normal;
+}
+
+.center {
+    text-align: center;
+}
+
+.margin-left-right-5{
+    margin-left: 5px;
+    margin-right: 5px;
 }
