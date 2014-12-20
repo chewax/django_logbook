@@ -45,6 +45,7 @@
       <primary-key columns="id"/>
       <exported-key name="#FAKE_accounts_user_groups_2" table="accounts_user_groups" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_accounts_user_user_permissions_2" table="accounts_user_user_permissions" schema="" catalog="" columns="user_id"/>
+      <exported-key name="#FAKE_flights_flight_1" table="flights_flight" schema="" catalog="" columns="user_id"/>
     </table>
     <table name="accounts_user_groups" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
@@ -188,20 +189,21 @@
     <table name="flights_flight" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="number" sqlType="VARCHAR(10)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
-      <column name="flight_dest_ICAO" sqlType="VARCHAR(4)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
-      <column name="flight_origin_ICAO" sqlType="VARCHAR(4)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="user_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
       <primary-key columns="id"/>
+      <foreign-key name="#FAKE_flights_flight_1" columns="user_id" ref-table="accounts_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <exported-key name="#FAKE_flights_flightleg_1" table="flights_flightleg" schema="" catalog="" columns="flight_id"/>
+      <index name="flights_flight_e8701ad4" unique="true" columns="user_id"/>
     </table>
     <table name="flights_flightleg" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="departure_airport" sqlType="VARCHAR(4)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="arrival_airport" sqlType="VARCHAR(4)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
-      <column name="time_out" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="time_off" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="time_on" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="time_in" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="flight_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="time_out" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <primary-key columns="id"/>
       <foreign-key name="#FAKE_flights_flightleg_1" columns="flight_id" ref-table="flights_flight" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <index name="flights_flightleg_72144cf2" unique="true" columns="flight_id"/>

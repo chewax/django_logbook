@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from django.core.urlresolvers import reverse_lazy
+from django.conf import global_settings
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -42,6 +43,7 @@ INSTALLED_APPS = (
     'flights',
     'pages',
     'dashboard',
+    'django_tables2',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -94,3 +96,7 @@ STATICFILES_DIRS = (
 )
 
 AUTH_USER_MODEL = 'accounts.User'
+
+TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
+    'django.core.context_processors.request',
+)

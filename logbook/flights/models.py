@@ -55,6 +55,21 @@ class Flight(models.Model):
 
         return last_leg.time_in - first_leg.time_out
 
+    @property
+    def departure_ICAO(self):
+        legs = self.flightleg_set.first()
+        return legs.departure_airport
+
+    @property
+    def arrival_ICAO(self):
+        legs = self.flightleg_set.last()
+        return legs.arrival_airport
+
+    def date(self):
+        legs = self.flightleg_set.first()
+        return legs.time_out.date()
+
+
 
 class FlightLeg(models.Model):
     flight = models.ForeignKey(Flight)

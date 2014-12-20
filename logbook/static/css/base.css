@@ -5,7 +5,7 @@
 /*}*/
 
 .aside-left{
-    background-color: blueviolet;
+    /*background-color: blueviolet;*/
     width: 21%;
     min-width: 150px;
     float: left;
@@ -15,13 +15,13 @@
 .aside-right{
     float: right;
     width: 21%;
-    background-color: #e223da;
+    /*background-color: #e223da;*/
     height: 100%;
     min-width: 150px;
 }
 
 .footer{
-    background-color: #e2a01a;
+    /*background-color: #e2a01a;*/
     width: 100%;
     height: 20%;
     /*min-height: 300px;*/
@@ -29,7 +29,7 @@
 }
 
 .content{
-    background-color: #0fff0a;
+    /*background-color: #0fff0a;*/
     width: 58%;
     display: inline-block;
     height: 100%;
@@ -214,4 +214,61 @@ a:visited{
 .margin-left-right-5{
     margin-left: 5px;
     margin-right: 5px;
+}
+
+.base-table{
+    width: 100%;
+    font-size: 0.75em;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #212121;
+    border-collapse: collapse;
+	background:#d5d5d5;
+	border: #d5d5d5 3px solid;
+    text-align: left;
+    font-weight: 300;
+}
+
+.base-table th{
+    font-weight: 500;
+    padding-bottom: 0.8em;
+    padding-top: 0.8em;
+    font-size: 1.05em;
+}
+
+.base-table tr{
+    border-bottom: solid 1px #d5d5d5;
+}
+
+.base-table .collapsable-sub-header{
+    background-color: #fafafa;
+}
+
+.base-table .collapsable-sub-header td{
+    padding-bottom: 0.7em;
+    padding-top: 0.7em;
+}
+
+.base-table .sub-header{
+    font-weight: 400;
+}
+
+.base-table .sub-header{
+
+}
+
+.base-table .sub-header td{
+    padding-top: 5px;
+    /*border-bottom: solid 1px #818181;*/
+}
+
+.base-table .row-even{
+    background-color: #e5e5e5;
+}
+
+.base-table .row-odd{
+
+}
+
+.hidden{
+    display: none;
 }
