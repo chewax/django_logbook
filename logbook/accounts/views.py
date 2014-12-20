@@ -12,7 +12,7 @@ class LoginUserView(FormView):
 
     template_name = 'accounts/login.html'
     form_class = AuthenticateUserForm
-    success_url = '/'
+    success_url = 'dashboard/'
 
     def get(self, request, *args, **kwargs):
         user = request.user

@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'accounts',
     'flights',
     'pages',
+    'dashboard',
 )
 
 MIDDLEWARE_CLASSES = (

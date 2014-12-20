@@ -1,13 +1,28 @@
-from django.shortcuts import render_to_response, redirect
-from django.views.generic import FormView, CreateView
+from django.shortcuts import render, redirect
+
+# Create your views here.
+from django.views.generic import CreateView, TemplateView
 from flights.forms import FlightEntryForm, FlightLegFormset
-# from flights.models import Flight, FlightLeg
+from flights.models import Flight, FlightLeg
 
 
-class ProcessFlightView(CreateView):
+class DashboardProcessView(TemplateView):
+    template_name = 'dashboard/dashboard.html'
+    # model = Flight
+
+    def get_context_data(self, **kwargs):
+        context = super(DashboardProcessView, self).get_context_data(**kwargs)
+        append_context = []
+        user = self.request.user
+        context['flights'] = Flight.objects.filter(user=user)
+        return context
+
+
+
+class DashboardProcessView_future(CreateView):
     form_class = FlightEntryForm
-    template_name = 'flights/add_flight.html'
-    success_url = '/'
+    template_name = 'dashboard/dashboard.html'
+    success_url = 'dashboard/dashboard.html'
 
 
     def get_context_data(self, **kwargs):
@@ -16,7 +31,7 @@ class ProcessFlightView(CreateView):
         :param kwargs:
         :return: context (dict)
         """
-        context = super(ProcessFlightView, self).get_context_data(**kwargs)
+        context = super(DashboardProcessView_future, self).get_context_data(**kwargs)
         if self.request.POST:
             context['flight_legs'] = FlightLegFormset(self.request.POST)
         else:
@@ -45,9 +60,6 @@ class ProcessFlightView(CreateView):
             #Asociate fomset to flight
             leg_formset.instance = flight
             leg_formset.save()
-            return redirect('/')
+            return redirect('dashboard/dashboard.html')
         else:
             return self.render_to_response(self.get_context_data(form=form))
-
-
-

@@ -1,0 +1,10 @@
+.flight-wrapper{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.card{
+    max-width: 300px;
+    float: left;
+    margin: 5px 10px;
+}

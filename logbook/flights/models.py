@@ -1,12 +1,13 @@
+from django.contrib.auth.models import AnonymousUser
 from django.db import models
-
 from datetime import timedelta
+from accounts.models import User
+
 # Create your models here.
 
 class Flight(models.Model):
+    user = models.ForeignKey(User, null=True)
     number = models.CharField(max_length=10, blank=True)
-    flight_origin_ICAO = models.CharField(max_length=4, blank=True, null=True, verbose_name="From")
-    flight_dest_ICAO = models.CharField(max_length=4, blank=True, null=True, verbose_name="To")
 
     def __unicode__(self):
         return '{}'.format(self.number)
@@ -54,14 +55,15 @@ class Flight(models.Model):
 
         return last_leg.time_in - first_leg.time_out
 
+
 class FlightLeg(models.Model):
     flight = models.ForeignKey(Flight)
-    departure_airport = models.CharField(max_length=4)
-    arrival_airport = models.CharField(max_length=4)
-    time_out = models.DateTimeField('Time OUT')
-    time_off = models.DateTimeField('Time OFF')
-    time_on = models.DateTimeField('Time ON')
-    time_in = models.DateTimeField('Time IN')
+    departure_airport = models.CharField(max_length=4, verbose_name="From:")
+    arrival_airport = models.CharField(max_length=4, verbose_name="To:")
+    time_out = models.DateTimeField('OUT')
+    time_off = models.DateTimeField('OFF')
+    time_on = models.DateTimeField('ON')
+    time_in = models.DateTimeField('IN')
 
     def __unicode__(self):
         return '{} :: {} - {}'.format(self.flight.number, self.departure_airport, self.arrival_airport)

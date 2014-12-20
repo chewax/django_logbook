@@ -1,0 +1,36 @@
+{% extends 'accounts/base.html' %}
+{% load static from staticfiles %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/base_flights.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="flight-wrapper">
+        <form method="post" action="/flights/new">
+            {% csrf_token %}
+            <div class="flight-header card">
+                {% for field in form %}
+                    <div class="field">
+                        {{ field.errors }}
+                        {{ field }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="flight-legs">
+                {{ flight_legs.management_form }}
+                <table>
+                {% for leg_form in flight_legs %}
+                    <tr>
+                        {% for leg_field in leg_form %}
+                            <td>{{ leg_field }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                </table>
+            </div>
+            <div class="field"><button class="ghost-button" type="submit">Add</button></div>
+        </form>
+    </div>
+{% endblock %}

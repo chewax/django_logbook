@@ -8,7 +8,7 @@
 
 {% block content %}
     <div class="login-wrapper">
-        <div class="login-card ghost-div">
+        <div class="login-card media-card-div">
             <div class="field center">
             <img class="avatar-img" src="{% static 'img/avatar.svg' %}">
             </div>
@@ -17,9 +17,9 @@
                     <div class="alert alert-warning" role="alert">{{ form.non_field_errors }}</div>
                 {% endif %}
                 {% csrf_token %}
-                <div class="field ghost-input">{{ form.username }}</div>
-                <div class="field ghost-input">{{ form.password }}</div>
-                <div class="field"><button class="ghost-button" type="submit">Login</button></div>
+                <div class="field media-input">{{ form.username }}</div>
+                <div class="field media-input">{{ form.password }}</div>
+                <div class="field"><button class="media-button" type="submit">Login</button></div>
 {#                <div class="field center">#}
 {#                        <a href="/accounts/register"><i class="fa fa-envelope fa-2x margin-left-right-5"></i></a>#}
 {#                        <a href="#"><i class="fa fa-twitter fa-2x margin-left-right-5"></i></a>#}

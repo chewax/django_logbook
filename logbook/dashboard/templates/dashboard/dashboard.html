@@ -1,0 +1,13 @@
+{% extends "accounts/base.html" %}
+{% load static from staticfiles %}
+
+{% block content %}
+{#    {% regroup flights|dictsort:"time_out" by flight as flight_list %}#}
+
+    {% for flight in flights %}
+        {% for legs in flight.detail_set.all %}
+            {{ legs.departure_airport }}
+        {% endfor %}
+    {% endfor %}
+
+{% endblock %}

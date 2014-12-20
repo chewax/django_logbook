@@ -10,24 +10,18 @@
     <div class="register-wrapper">
 
             <form class="register-form" method="post" action="/accounts/register">
-                <div class="register-card ghost-div">
+                <div class="register-card media-card-div">
                 {{ form.non_field_errors }}
                 {% csrf_token %}
                     {% for field in form %}
-                        <div class="field ghost-input">
+                        <div class="field media-input">
                             {{ field.errors }}
                             {{ field.label_tag }}{{ field }}
                         </div>
                     {% endfor %}
-                     <div class="field"><button class="ghost-button" type="submit">Register</button></div>
+                     <div class="field"><button class="media-button" type="submit">Register</button></div>
                 </div>
-{#                <div class="register-card ghost-div">#}
-{#                    <div class="field center">#}
-{#                        <img class="avatar-img" src="{% static 'img/avatar.svg' %}">#}
-{#                    </div>#}
-{#                </div>#}
             </form>
-
 
     </div>
 {% endblock %}
