@@ -1,11 +1,10 @@
-<div class="user-box pull-right">
+<div class="user-box">
     {% if user.is_authenticated %}
-            You are signed in as <a href="/accounts/profile">
-                {{ user.first_name }} {{ user.last_name }}
-            </a> -
-            <a href="/logout"> Logout </a>
+            <div class="menu-item"><i class="fa fa-user fa-3x"></i></div>
+            <div class="menu-text"><a href="/logout"> Logout </a></div>
     {% else %}
-        <a href="/login"> Login </a> -
-        <a href="/accounts/register"> Register </a>
+        <div class="menu-item"><i class="fa fa-user fa-3x"></i></div>
+        <div class="menu-text"><a href="/login">Login</a></div>
+        <div class="menu-text"><a href="/login">Register</a></div>
     {% endif %}
 </div>

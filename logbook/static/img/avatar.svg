@@ -5,9 +5,9 @@
   <feGaussianBlur in="SourceAlpha" stdDeviation="15" result="blur"/> <!-- stdDeviation is how much to blur -->
   
   <feComponentTransfer in="blur" result="offsetColor">
-     <feFuncR type="discrete" tableValues="0.2"/>
+     <feFuncR type="discrete" tableValues="0.3"/>
      <feFuncG type="discrete" tableValues="0.3"/>
-     <feFuncB type="discrete" tableValues="0.5"/>
+     <feFuncB type="discrete" tableValues="0.3"/>
  </feComponentTransfer>
     
   <feOffset in="offsetColor" dx="-10" dy="10" result="offsetblur"/> <!-- how much to offset -->

@@ -1,0 +1,10 @@
+<div class="drawer-menu">
+    <div class="drawer-icon-left">
+        <i class="fa fa-bars fa-3x"></i>
+    </div>
+    <div class="drawer-logged-user">
+        {% if user.is_authenticated %}
+            <span>{{ user.first_name }} {{ user.last_name }}</span>
+        {% endif %}
+    </div>
+</div>

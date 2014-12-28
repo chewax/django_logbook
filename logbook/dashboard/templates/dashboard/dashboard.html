@@ -3,49 +3,49 @@
 
 {% block css %}
     {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/base_dashboard.css' %}">
 {% endblock %}
 
 {% block content %}
-    <table class="base-table">
-        <tr>
-            <th></th>
-            <th>Date</th>
-            <th>From</th>
-            <th>To</th>
-            <th>Flight Time</th>
-            <th>Total Time</th>
-        </tr>
-        {% for flight in flights %}
-            <tr class="collapsable-sub-header">
-                <td class="column-header">{{ flight.number }}</td>
-                <td>{{ flight.date }}</td>
-                <td>{{flight.departure_ICAO}}</td>
-                <td>{{flight.arrival_ICAO}}</td>
-                <td>{{flight.flight_time}}</td>
-                <td>{{flight.flight_service_time}}</td>
-                <td class="fa fa-plus"></td>
+    <div class="content">
+        <div class="search-box">
+            <form method="POST" action="/dashboard/" id="search-form">
+                {% csrf_token %}
+                <input type="text" name="query_input" id="search-input">
+                <button class="media-button" type="submit" name="dashboard_btn_search">Search</button>
+            </form>
+        </div>
+
+        <table class="base-table">
+            <tr>
+                <th></th>
+                <th>Date</th>
+                <th>Aircraft</th>
+                <th>Type</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Flight Time</th>
+                <th>Service Time</th>
+                <th>T/O</th>
+                <th>Ldgs</th>
             </tr>
-            <tr class="sub-header hidden">
-                <td></td>
-                <td></td>
-                <td>Out</td>
-                <td>Off</td>
-                <td>On</td>
-                <td>In</td>
-            </tr>
-            {% for legs in flight.flightleg_set.all %}
-{#                {% cycle 'row-even' 'row-odd' as rowclass%}#}
-                <tr class="{{forloop.counter|divisibleby:2|yesno:"row-even,row-odd"}} hidden">
-                    <td>{{ legs.departure_airport }}</td>
-                    <td>{{ legs.arrival_airport }}</td>
-                    <td>{{ legs.time_out }}</td>
-                    <td>{{ legs.time_off }}</td>
-                    <td>{{ legs.time_on }}</td>
-                    <td>{{ legs.time_in }}</td>
+            {% for flight in flights %}
+                <tr class="rows {{forloop.counter|divisibleby:2|yesno:"row-even,row-odd"}}">
+                    <td class="column-header">{{ flight.number }}</td>
+                    <td>{{flight.date|date:"Y-m-d"}}</td>
+                    <td>{{flight.aircraft.reg_number}}</td>
+                    <td>{{flight.aircraft.model.short_name}}</td>
+                    <td>{{flight.departure_ICAO}}</td>
+                    <td>{{flight.arrival_ICAO}}</td>
+                    <td>{{flight.flight_time}}</td>
+                    <td>{{flight.flight_service_time}}</td>
+                    <td>{{flight.takeoffs}}</td>
+                    <td>{{flight.landings}}</td>
                 </tr>
             {% endfor %}
-        {% endfor %}
-
-    </table>
-
+        </table>
+    </div>
+    <div class="footer">
+        Footer
+    </div>
 {% endblock %}
