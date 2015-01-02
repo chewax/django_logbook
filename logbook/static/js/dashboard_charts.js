@@ -2,19 +2,25 @@ var chart;
 var graph;
 
 AmCharts.ready(function () {
+
+    //DATA
+    // Async must be false, otherwise it continues and chartData is null.
+    var ajax_response = $.ajax({url:"/dashboard/get_flight_data/", type:"POST", dataType:"json", async:false});
+    var chartData = ajax_response.responseJSON;
+
     // SERIAL CHART
     chart = new AmCharts.AmSerialChart();
     chart.pathToImages = "/static/amcharts/images/";
     chart.dataProvider = chartData;
     chart.marginLeft = 10;
-    chart.categoryField = "day";
+    chart.categoryField = "date";
     chart.dataDateFormat = "YYYY-MM-DD";
     chart.color = "#0EABF8";
     chart.gridColor = "#0EABF8";
     chart.gridAlpha = 0;
 
     // listen for "dataUpdated" event (fired when chart is inited) and call zoomChart method when it happens
-    //chart.addListener("dataUpdated", zoomChart);
+    chart.addListener("dataUpdated", zoomChart);
 
     // AXES
     // category
@@ -42,12 +48,36 @@ AmCharts.ready(function () {
     graph.type = "line";
     graph.lineColor = "#91FD4B";
     graph.bullet = "round";
-    graph.bulletSize = 8;
+    graph.bulletSize = 5;
     graph.bulletBorderColor = "#FFFFFF";
     graph.bulletBorderAlpha = 1;
-    graph.bulletBorderThickness = 2;
+    graph.bulletBorderThickness = 1;
     graph.lineThickness = 2;
-    graph.valueField = "value";
+    graph.valueField = "daily_time";
+    graph.balloonText = "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>";
+    chart.addGraph(graph);
+
+    // GRAPH LEGEND
+    //var legend = new AmCharts.AmLegend();
+    //legend.markerType = "circle";
+    //legend.position = "right";
+    //legend.marginRight = 80;
+    //legend.autoMargins = false;
+    //chart.addLegend(legend);
+
+
+    // GRAPH
+    graph = new AmCharts.AmGraph();
+    //graph.type = "smoothedLine"; // this line makes the graph smoothed line.
+    graph.type = "line";
+    graph.lineColor = "#FD772D";
+    graph.bullet = "round";
+    graph.bulletSize = 5;
+    graph.bulletBorderColor = "#FFFFFF";
+    graph.bulletBorderAlpha = 1;
+    graph.bulletBorderThickness = 1;
+    graph.lineThickness = 2;
+    graph.valueField = "accumulated_time";
     graph.balloonText = "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>";
     chart.addGraph(graph);
 
@@ -77,5 +107,5 @@ AmCharts.ready(function () {
 // this method is called when chart is first inited as we listen for "dataUpdated" event
 function zoomChart() {
     // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
-    chart.zoomToDates(new Date(1972, 0), new Date(1984, 0));
+    chart.zoomToDates(new Date(2014, 11), new Date(2014, 12));
 }

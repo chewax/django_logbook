@@ -99,7 +99,9 @@
 .drawer-menu {
   display: none;
   color: #D6DBDF;
-  background-color: #333; }
+  background-color: #333;
+  position: relative;
+  min-height: 50px; }
   @media only screen and (max-width: 640px) {
     .drawer-menu {
       display: block; } }
@@ -114,7 +116,10 @@
 .drawer-logged-user {
   float: right;
   width: 85%;
-  text-align: right; }
+  text-align: right;
+  position: absolute;
+  right: 10px;
+  line-height: 50px; }
 
 .content {
   /*background-color: #0fff0a;*/
@@ -126,7 +131,7 @@
       max-height: 900px; } }
 
 .search-box {
-  background-color: gray;
+  background-color: #056a9b;
   text-align: right;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -139,7 +144,7 @@
   height: 25px;
   margin-left: 10px;
   margin-right: 10px;
-  width: 300px; }
+  width: 250px; }
 
 .search-box button {
   padding: 5px 20px; }
