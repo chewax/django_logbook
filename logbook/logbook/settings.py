@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'pages',
     'dashboard',
     'aircrafts',
+    'widget_tweaks',
 )
 
 MIDDLEWARE_CLASSES = (

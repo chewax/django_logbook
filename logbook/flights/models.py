@@ -5,12 +5,32 @@ from datetime import timedelta
 from accounts.models import User
 from aircrafts.models import Aircraft
 
-# Create your models here.
 
 class Flight(models.Model):
     user = models.ForeignKey(User, null=True)
     number = models.CharField(max_length=10, blank=True)
     aircraft = models.ForeignKey(Aircraft)
+
+    DUTY_CHOICES = (
+        ('FLY', 'Fly'),
+        ('SIM', 'Simulator'),
+        ('DDH', 'Dead Head'),
+        ('SBY', 'Standby'),
+    )
+    # FLY/SIM/DEAD HEAD/STAND BY
+    duty = models.CharField(max_length=3, blank=True,
+                            default="FLY", choices=DUTY_CHOICES)
+
+    ROLE_CHOICES = (
+        ('PIC', 'Pilot in command'),
+        ('SIC', 'Second in command'),
+        ('ENG', 'Engineer'),
+        ('NAV', 'Navigator'),
+        ('CCR', 'Cabin Crew'),
+    )
+    # PIC/SIC/ENG/NAV/CCREW
+    role = models.CharField(max_length=4, blank=True,
+                            default="PIC", choices=ROLE_CHOICES)
 
     def __unicode__(self):
         return '{}'.format(self.number)
@@ -93,6 +113,15 @@ class FlightLeg(models.Model):
     arrival_airport = models.CharField(max_length=4, verbose_name="To:")
     take_offs = models.IntegerField(verbose_name="Takeoffs:", default=1)
     landings = models.IntegerField(verbose_name="Landings:", default=1)
+
+    RULES_CHOICES = (
+        ('IFR', 'IFR'),
+        ('VFR', 'VFR'),
+        ('SIFR', 'Simulated IFR'),
+    )
+    # IFR/VFR/Sim-IFR
+    rules = models.CharField(max_length=4, blank=True,
+                             default="IFR", choices=RULES_CHOICES)
     time_out = models.DateTimeField('OUT')
     time_off = models.DateTimeField('OFF')
     time_on = models.DateTimeField('ON')

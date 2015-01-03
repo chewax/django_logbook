@@ -2,7 +2,6 @@ var chart;
 var graph;
 var $selection;
 
-
 $("#dropdown_limit").change(function(){
     $selection = $(this).val();
     // All time chart
@@ -103,7 +102,7 @@ AmCharts.ready(function () {
     chartScrollbar.dragIconHeight = 14;
     chartScrollbar.scrollbarHeight = 10;
 
-    chart.addChartScrollbar(chartScrollbar);
+    //chart.addChartScrollbar(chartScrollbar);
 
     chart.creditsPosition = "top-left";
 
