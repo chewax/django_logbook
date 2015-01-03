@@ -2,8 +2,8 @@ from django.views.generic import TemplateView
 from django.db.models import Q
 from django.views.generic import View
 from django.http import HttpResponse
-from django.core import serializers
 
+from datetime import timedelta, datetime
 import json
 
 from flights.models import Flight
@@ -51,6 +51,184 @@ class DashboardProcessView(TemplateView):
 
 class FlightData(View):
 
+    def get_all_time_data(self):
+        """
+        Retrieves flown hours for all time. Accumulated
+        :return: List of dictionaries.
+        """
+        data = []
+        accumulated_time = 0
+
+        #TODO Retrieve this values from user settings
+        limit = 90
+
+        # Get all flights
+        for flight in Flight.objects.filter(user=self.request.user).\
+                order_by('flightleg__time_out'):
+            hours = round(float(flight.flight_time.seconds)/3600, 2)
+            accumulated_time += hours
+            data.append({
+                "date": flight.date.isoformat(),
+                "time": accumulated_time,
+                "limit": limit,
+            })
+        return data
+
+    def get_last_30_days(self):
+        """
+        Retrieves flown hours of last 30 days. Accumulated
+        :return: List of dictionaries.
+        """
+        data = []
+        accumulated_time = 0
+        #TODO Retrieve this values from user settings
+        limit = 120
+
+        # Construct the starting date to be considered
+        start_date = datetime.today() + timedelta(days=-30)
+
+        for flight in Flight.objects.filter(user=self.request.user).\
+                order_by('flightleg__time_out').\
+                filter(flightleg__time_out__gte=start_date):
+            hours = round(float(flight.flight_time.seconds)/3600, 2)
+            accumulated_time += hours
+            data.append({
+                "date": flight.date.isoformat(),
+                "time": accumulated_time,
+                "limit": limit
+            })
+        return data
+
+    def get_last_90_days(self):
+        """
+        Retrieves flown hours of last 90 days. Accumulated
+        :return: List of dictionaries.
+        """
+        data = []
+        accumulated_time = 0
+        #TODO Retrieve this values from user settings
+        limit = 300
+
+        # Construct the starting date to be considered
+        start_date = datetime.today() + timedelta(days=-90)
+
+        for flight in Flight.objects.filter(user=self.request.user).\
+                order_by('flightleg__time_out').\
+                filter(flightleg__time_out__gte=start_date):
+            hours = round(float(flight.flight_time.seconds)/3600, 2)
+            accumulated_time += hours
+            data.append({
+                "date": flight.date.isoformat(),
+                "time": accumulated_time,
+                "limit": limit
+            })
+        return data
+
+    def get_last_12_months(self):
+        """
+        Retrieves flown hours of last 12 consecutive months. Accumulated
+        :return: List of dictionaries.
+        """
+        data = []
+        accumulated_time = 0
+        #TODO Retrieve this values from user settings
+        limit = 1000
+
+        # Construct the starting date to be considered
+        target_year = datetime.today().year - 1
+        current_month = datetime.today().month
+        start_date = datetime(year=target_year, month=current_month, day=1)
+
+        for flight in Flight.objects.filter(user=self.request.user).\
+                order_by('flightleg__time_out').\
+                filter(flightleg__time_out__gte=start_date):
+            hours = round(float(flight.flight_time.seconds)/3600, 2)
+            accumulated_time += hours
+            data.append({
+                "date": flight.date.isoformat(),
+                "time": accumulated_time,
+                "limit": limit
+            })
+        return data
+
+    def get_current_month(self):
+        """
+        Retrieves flown hours of current month. Accumulated
+        :return: List of dictionaries.
+        """
+        current_year = datetime.today().year
+        current_month = datetime.today().month
+        data = []
+
+        accumulated_time = 0
+        #TODO Retrieve this values from user settings
+        limit = 90
+
+        for flight in Flight.objects.filter(user=self.request.user).\
+                order_by('flightleg__time_out').\
+                filter(flightleg__time_out__year=current_year,
+                       flightleg__time_out__month=current_month):
+            hours = round(float(flight.flight_time.seconds)/3600, 2)
+            accumulated_time += hours
+            data.append({
+                "date": flight.date.isoformat(),
+                "time": accumulated_time,
+                "limit": limit,
+            })
+
+        return data
+
+
+    def get_last_calendar_year(self):
+        """
+        Retrieves flown hours of last calendar year. Accumulated
+        :return: List of dictionaries.
+        """
+        target_year = datetime.today().year - 1
+        data = []
+
+        accumulated_time = 0
+        #TODO Retrieve this values from user settings
+        limit = 1000
+
+        for flight in Flight.objects.filter(user=self.request.user).\
+                order_by('flightleg__time_out').\
+                filter(flightleg__time_out__year=target_year):
+            hours = round(float(flight.flight_time.seconds)/3600, 2)
+            accumulated_time += hours
+            data.append({
+                "date": flight.date.isoformat(),
+                "time": accumulated_time,
+                "limit": limit,
+            })
+
+        return data
+
+    def get_current_calendar_year(self):
+        """
+        Retrieves flown hours of last calendar year. Accumulated
+        :return: List of dictionaries.
+        """
+        target_year = datetime.today().year
+        data = []
+
+        accumulated_time = 0
+        #TODO Retrieve this values from user settings
+        limit = 1000
+
+        for flight in Flight.objects.filter(user=self.request.user).\
+                order_by('flightleg__time_out').\
+                filter(flightleg__time_out__year=target_year):
+            hours = round(float(flight.flight_time.seconds)/3600, 2)
+            accumulated_time += hours
+            data.append({
+                "date": flight.date.isoformat(),
+                "time": accumulated_time,
+                "limit": limit,
+            })
+
+        return data
+
     def post(self, request):
         """
         Computes various statistic parameters of flight time. Such as,
@@ -64,23 +242,27 @@ class FlightData(View):
         :param request: HttpRequest
         :return: HttpResponse with JSON.
         """
-        data = []
-        accumulated_time = 0
-        #TODO Retrieve this values from user settings
-        limit_30 = 90
-        limit_90 = 240
-        limit_365 = 1000
-        for flight in Flight.objects.filter(user=self.request.user).order_by('flightleg__time_out'):
-            hours = float(flight.flight_time.seconds)/3600
-            accumulated_time += hours
-            data.append({
-                "date": "{}-{}-{}".format(flight.date.year, flight.date.month, flight.date.day),
-                "daily_time": hours,
-                "accumulated_time": accumulated_time,
-                "limit_30": limit_30,
-                "limit_90": limit_90,
-                "limit_365": limit_365
-            })
+        retrieve = self.request.POST["retrieve"]
+        if retrieve == 'at':
+            data = self.get_all_time_data()
+
+        elif retrieve == '1m':
+            data = self.get_current_month()
+
+        elif retrieve == '30d':
+            data = self.get_last_30_days()
+
+        elif retrieve == '90d':
+            data = self.get_last_90_days()
+
+        elif retrieve == '1y':
+            data = self.get_last_calendar_year()
+
+        elif retrieve == '12m':
+            data = self.get_last_12_months()
+
+        elif retrieve == 'cy':
+            data = self.get_current_calendar_year()
 
         return HttpResponse(json.dumps(data))
 
