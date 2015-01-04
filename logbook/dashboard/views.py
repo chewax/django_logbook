@@ -2,6 +2,7 @@ from django.views.generic import TemplateView
 from django.db.models import Q
 from django.views.generic import View
 from django.http import HttpResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from datetime import timedelta, datetime
 import json
@@ -36,12 +37,26 @@ class DashboardProcessView(TemplateView):
 
                 # TODO Add Distinct to this query -- .distinct('pk')
                 # It is currently not supported by the database backend
-                context['flights'] = Flight.objects.filter(q)
+                result_set = Flight.objects.filter(q)
             else:
-                context['flights'] = Flight.objects.filter(user=user)
+                result_set = Flight.objects.filter(user=user)
         else:
-            context['flights'] = Flight.objects.filter(user=user)
+            result_set = Flight.objects.filter(user=user)
 
+        # Add Pagination
+        paginator = Paginator(result_set, 16) #Show 15 Flights
+        page = self.request.GET.get('page')
+        try:
+            flights = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            flights = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last
+            #  page of results.
+            flights = paginator.page(paginator.num_pages)
+
+        context['flights'] = flights
         return context
 
     def post(self, request, *args, **kwargs):

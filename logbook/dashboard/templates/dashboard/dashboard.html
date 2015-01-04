@@ -10,39 +10,72 @@
                 <button class="media-button" type="submit" name="dashboard_btn_search">Search</button>
             </form>
         </div>
-
-        <table class="base-table">
-            <tr>
-                <th>#</th>
-                <th>Date</th>
-                <th>Aircraft</th>
-                <th>Type</th>
-                <th>From</th>
-                <th>To</th>
-                <th>Duty</th>
-                <th>Role</th>
-                <th>Flight Time</th>
-                <th>Service Time</th>
-{#                <th>T/O</th>#}
-{#                <th>Ldgs</th>#}
-            </tr>
-            {% for flight in flights %}
-                <tr class="rows {{forloop.counter|divisibleby:2|yesno:"row-even,row-odd"}}">
-                    <td class="column-header">{{ flight.number }}</td>
-                    <td>{{flight.date|date:"Y-m-d"}}</td>
-                    <td>{{flight.aircraft.reg_number}}</td>
-                    <td>{{flight.aircraft.model.short_name}}</td>
-                    <td>{{flight.departure_ICAO}}</td>
-                    <td>{{flight.arrival_ICAO}}</td>
-                    <td>{{flight.duty}}</td>
-                    <td>{{flight.role}}</td>
-                    <td>{{flight.flight_time}}</td>
-                    <td>{{flight.flight_service_time}}</td>
-{#                    <td>{{flight.takeoffs}}</td>#}
-{#                    <td>{{flight.landings}}</td>#}
+        <div class="data-table-wrapper">
+            <table class="base-table">
+                <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Aircraft</th>
+                    <th class="hide-phone">Type</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th class="hide-phone">Duty</th>
+                    <th>Role</th>
+                    <th>Flight Time</th>
+                    <th class="hide-tablet">Service Time</th>
+                    <th>
+                        <a class="add-cross" href="/flights/new">
+                            <i class="fa fa-plus fa-lg"></i>
+                        </a>
+                    </th>
                 </tr>
-            {% endfor %}
-        </table>
+                {% for flight in flights %}
+                    <tr class="rows {{forloop.counter|divisibleby:2|yesno:"row-even,row-odd"}}">
+                        <td class="column-header">{{ flight.number }}</td>
+                        <td>{{flight.date|date:"Y-m-d"}}</td>
+                        <td>{{flight.aircraft.reg_number}}</td>
+                        <td class="hide-phone">{{flight.aircraft.model.short_name}}</td>
+                        <td>{{flight.departure_ICAO}}</td>
+                        <td>{{flight.arrival_ICAO}}</td>
+                        <td class="hide-phone">{{flight.duty}}</td>
+                        <td>{{flight.role}}</td>
+                        <td>{{flight.flight_time}}</td>
+                        <td class="hide-tablet">{{flight.flight_service_time}}</td>
+                        <td>
+                            <a class="hide-tablet" title="More..." href="#">
+                                <i class="fa fa-ellipsis-h fa-lg"></i>
+                            </a>
+                            &nbsp;
+                            <a title="Edit Trip" href="#">
+                                <i class="fa fa-pencil fa-lg"></i>
+                            </a>
+                            &nbsp;
+                            <a title="Delete" class="hide-tablet" href="#">
+                                <i class="fa fa-close fa-lg"></i>
+                            </a>
+
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="pagination-wrapper">
+            <div class="pagination">
+                <span class="step-links">
+                    {% if flights.has_previous %}
+                        <a href="?page={{ flights.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ flights.number }} of {{ flights.paginator.num_pages }}.
+                    </span>
+
+                    {% if flights.has_next %}
+                        <a href="?page={{ flights.next_page_number }}">next</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
     </div>
     <div class="footer">
         <div id="chart-title">

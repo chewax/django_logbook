@@ -7,7 +7,7 @@ from flights.forms import FlightEntryForm, FlightLegFormset
 class ProcessFlightView(CreateView):
     form_class = FlightEntryForm
     template_name = 'flights/add_flight.html'
-    success_url = '/'
+    success_url = '/flights/new'
 
 
     def get_context_data(self, **kwargs):
@@ -45,7 +45,7 @@ class ProcessFlightView(CreateView):
             #Asociate fomset to flight
             leg_formset.instance = flight
             leg_formset.save()
-            return redirect('/')
+            return redirect('/flights/new')
         else:
             return self.render_to_response(self.get_context_data(form=form))
 
