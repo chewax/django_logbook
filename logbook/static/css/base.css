@@ -122,9 +122,10 @@
   line-height: 50px; }
 
 .content {
-  /*background-color: #0fff0a;*/
+  background-color: #D6DBDF;
   width: 100%;
-  height: 70%; }
+  height: 70%;
+  position: relative; }
   @media only screen and (max-width: 640px) {
     .content {
       height: auto;
@@ -154,13 +155,14 @@
   height: auto; }
 
 .pagination-wrapper {
-  height: 20px; }
+  height: 20px;
+  position: absolute;
+  bottom: 0; }
 
 .footer {
   background-color: #333;
   width: 100%;
-  height: 30%;
-  padding-left: 10px; }
+  height: 30%; }
   @media only screen and (max-width: 640px) {
     .footer {
       height: 13em;
@@ -182,7 +184,6 @@
   border-radius: 2px;
   width: 150px;
   position: relative;
-  left: -10px;
   line-height: 20px;
   height: 25px;
   padding-left: 5px;
