@@ -13,12 +13,6 @@ $("#dropdown_limit").change(function(){
 
 });
 
-//$("tr").click(function(){
-//        $("this").addClass("selected").siblings().removeClass("selected");
-//        alert("pepe");
-//    }
-//);
-
 //DATA
 // Async must be false, otherwise it continues and chartData is null.
 var ajax_response = $.ajax({url:"/dashboard/get_flight_data/", type:"POST", dataType:"json", data:{retrieve:"30d"},  async:false});
