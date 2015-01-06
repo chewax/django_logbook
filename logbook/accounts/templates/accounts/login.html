@@ -17,7 +17,23 @@
                 <div class="field"><button class="media-button" type="submit">Login</button></div>
                 <div class="field center">
                     <a href="#">Forgot Password</a> -
-                    <a href="/accounts/register">Register</a>
+                    <a href="/accounts/register">Register with mail</a> <br><br>
+                    <span class="social-auth">
+                    <a href="{% url 'socialauth_begin' 'twitter' %}?{{ redirect_querystring }}">
+                        <i class="fa fa-twitter fa-2x"></i>
+                    </a>
+                    </span>
+{#                    Not Available right now#}
+{#                    <span class="social-auth">#}
+{#                    <a href="{% url 'socialauth_begin' 'facebook' %}?{{ redirect_querystring }}">#}
+{#                        <i class="fa fa-facebook fa-2x"></i>#}
+{#                    </a>#}
+{#                    </span>#}
+{#                    <span class="social-auth">#}
+{#                    <a href="{% url 'socialauth_begin' 'linkedin' %}?{{ redirect_querystring }}">#}
+{#                        <i class="fa fa-linkedin fa-2x"></i>#}
+{#                    </a>#}
+{#                    </span>#}
                 </div>
             </form>
         </div>

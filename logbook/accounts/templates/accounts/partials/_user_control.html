@@ -1,10 +1,18 @@
 <div class="user-box">
     {% if user.is_authenticated %}
-            <div class="menu-item"><i class="fa fa-user fa-3x"></i></div>
-            <div class="menu-text"><a href="/logout"> Logout </a></div>
+            <div class="menu-text">
+                <a href="/logout">
+                    <div class="menu-item"><i class="fa fa-user fa-3x"></i></div>
+                    Logout
+                </a>
+            </div>
     {% else %}
-        <div class="menu-item"><i class="fa fa-user fa-3x"></i></div>
-        <div class="menu-text"><a href="/login">Login</a></div>
-        <div class="menu-text"><a href="/login">Register</a></div>
+
+        <div class="menu-text">
+            <a href="/login">
+                <div class="menu-item"><i class="fa fa-user fa-3x"></i></div>
+                Login
+            </a>
+        </div>
     {% endif %}
 </div>

@@ -45,6 +45,8 @@ INSTALLED_APPS = (
     'dashboard',
     'aircrafts',
     'widget_tweaks',
+    'social_auth',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -100,4 +102,29 @@ AUTH_USER_MODEL = 'accounts.User'
 
 TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',
+    'social_auth.context_processors.social_auth_login_redirect',
+
 )
+
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.facebook.FacebookBackend',
+    'social_auth.backends.contrib.linkedin.LinkedinBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+LOGIN_URL = '/dashboard/'
+LOGIN_REDIRECT_URL = '/login/'
+LOGIN_ERROR_URL = '/login/'
+
+TWITTER_CONSUMER_KEY = 's3BsHMjPLtCY9goKVeMXyjhsR'
+TWITTER_CONSUMER_SECRET = 'c0ljEgvL76BdvdB4uCzMKqL0KvDfTgdMlsggxAskMVSmLNMv5R'
+
+# TODO Register App in Facbook and Linkedin to expand social auth experience
+FACEBOOK_APP_ID = ''
+FACEBOOK_API_SECRET = ''
+
+LINKEDIN_CONSUMER_KEY = ''
+LINKEDIN_CONSUMER_SECRET = ''
+
+SOCIAL_AUTH_ENABLED_BACKENDS = ('facebook', 'twitter', 'linkedin')
