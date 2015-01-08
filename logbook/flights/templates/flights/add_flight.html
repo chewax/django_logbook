@@ -12,16 +12,28 @@
         <form method="post" action="/flights/new">
             {% csrf_token %}
             <div class="flight-header">
+                <table>
                 {% for field in form %}
-                    <div class="form-field">
-                        {{ field.errors }}
-                        {{ field.name | title}} {{ field }}
-                    </div>
+                    <tr>
+                        <div class="form-field">
+                            {% if field.errors %}
+                                <div class="field-error">{{ field.errors }}</div>
+                            {% endif %}
+                            <td><div class="form-field-title">{{ field.name | title}} </div></td>
+                            <td><div class="form-field">{{ field }} </div></td>
+                        </div>
+                    </tr>
                 {% endfor %}
+                </table>
+            </div>
+            <div class="leg-control">
+                <div class="button" id="add_more"><i class="fa fa-plus fa-lg"></i></div>
+                <div class="button" id="remove_row"><i class="fa fa-minus fa-lg"></i></div>
             </div>
             <div class="flight-legs">
                 {{ flight_legs.management_form }}
-                <table>
+{#                TODO Change table padding#}
+                <table class="form-table">
                     <tr>
                         <th></th>
                         <th>From</th>
@@ -35,22 +47,27 @@
                         <th>In</th>
                     </tr>
                 {% for leg_form in flight_legs %}
-                    <tr>
+                    <tr class="rows {{forloop.counter|divisibleby:2|yesno:"row-even,row-odd"}}">
                         {% for leg_field in leg_form %}
-                            <td>
-                            {{ leg_field.errors }}
-                            {% if leg_field.name in "time_off,time_out,time_on,time_in" %}
-                                {{ leg_field | add_class:"datetimepicker"}}
-                            {% else %}
-                                {{ leg_field }}
+{#                            Remove the delete option#}
+                            {%  if not leg_field.name in "DELETE" %}
+                                <td>
+                                    {% if leg_field.errors %}
+                                        <div class="field-error">{{ leg_field.errors }}</div>
+                                    {% endif %}
+                                    {% if leg_field.name in "time_off,time_out,time_on,time_in" %}
+                                        {{ leg_field | add_class:"datetimepicker"}}
+                                    {% else %}
+                                        {{ leg_field }}
+                                    {% endif %}
+                                </td>
                             {% endif %}
-                            </td>
                         {% endfor %}
                     </tr>
                 {% endfor %}
                 </table>
+                <div class="button" id="leg-submit"><button class="form-button" type="submit">Insert</button></div>
             </div>
-            <div class="field"><button class="form-button" type="submit">Insert/Update</button></div>
         </form>
     </div>
 {% endblock %}
@@ -59,10 +76,5 @@
 {% block js %}
     {{ block.super }}
     <script src="{% static 'js/jquery.datetimepicker.js' %}" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(".datetimepicker").datetimepicker({
-        format:'Y-m-d H:i',
-        mask:true
-        });
-    </script>
+    <script src="{% static 'js/flights.js' %}" type="text/javascript"></script>
 {% endblock %}

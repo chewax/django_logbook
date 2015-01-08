@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm, inlineformset_factory
 from flights.models import Flight, FlightLeg
 
-FlightLegFormset = inlineformset_factory(Flight, FlightLeg)
+FlightLegFormset = inlineformset_factory(Flight, FlightLeg, max_num=1)
 
 
 class FlightEntryForm(ModelForm):

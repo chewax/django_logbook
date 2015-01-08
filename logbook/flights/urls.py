@@ -1,10 +1,12 @@
 from django.conf.urls import patterns, url
-from flights.views import ProcessFlightView
+from flights.views import ProcessFlightView, ProcessFlightDeletion
 
 
 urlpatterns = patterns('',
 
+
     url(r'^new', ProcessFlightView.as_view(), name='new'),
+    url(r'^delete/(?P<pk>\d+)/$', ProcessFlightDeletion.as_view(), name='delete'),
 
 )
 

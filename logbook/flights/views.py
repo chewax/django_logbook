@@ -1,11 +1,12 @@
 from django.shortcuts import render_to_response, redirect
-from django.views.generic import FormView, CreateView
+from django.views.generic import FormView, CreateView, View
 from flights.forms import FlightEntryForm, FlightLegFormset
 # from flights.models import Flight, FlightLeg
 
 
 class ProcessFlightView(CreateView):
     form_class = FlightEntryForm
+    # TODO Use Reverse
     template_name = 'flights/add_flight.html'
     success_url = '/flights/new'
 
@@ -45,9 +46,13 @@ class ProcessFlightView(CreateView):
             #Asociate fomset to flight
             leg_formset.instance = flight
             leg_formset.save()
+            # TODO Use Reverse
             return redirect('/flights/new')
         else:
             return self.render_to_response(self.get_context_data(form=form))
 
 
-
+#
+class ProcessFlightDeletion(View):
+    def post(self):
+        pass
