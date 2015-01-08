@@ -46,28 +46,26 @@
                         <th>On</th>
                         <th>In</th>
                     </tr>
-                {% for leg_form in flight_legs %}
-                    <tr class="rows {{forloop.counter|divisibleby:2|yesno:"row-even,row-odd"}}">
-                        {% for leg_field in leg_form %}
-{#                            Remove the delete option#}
-                            {%  if not leg_field.name in "DELETE" %}
-                                <td>
-                                    {% if leg_field.errors %}
-                                        <div class="field-error">{{ leg_field.errors }}</div>
-                                    {% endif %}
-                                    {% if leg_field.name in "time_off,time_out,time_on,time_in" %}
-                                        {{ leg_field | add_class:"datetimepicker"}}
-                                    {% else %}
-                                        {{ leg_field }}
-                                    {% endif %}
-                                </td>
-                            {% endif %}
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
+                    {% for leg_form in flight_legs %}
+                        <tr class="rows {{forloop.counter|divisibleby:2|yesno:"row-even,row-odd"}}">
+                            {% for leg_field in leg_form %}
+{#                                Remove the delete option#}
+                                {%  if not leg_field.name in "DELETE" %}
+                                    <td>
+                                        {% if leg_field.errors %}
+                                            <div class="field-error">{{ leg_field.errors }}</div>
+                                        {% endif %}
+                                        {% if leg_field.name in "time_off,time_out,time_on,time_in" %}
+                                            {{ leg_field | add_class:"datetimepicker"}}
+                                        {% else %}
+                                            {{ leg_field }}
+                                        {% endif %}
+                                    </td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
                 </table>
-                <div class="button" id="leg-submit"><button class="form-button" type="submit">Insert</button></div>
-            </div>
         </form>
     </div>
 {% endblock %}
