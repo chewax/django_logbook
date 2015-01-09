@@ -54,7 +54,6 @@ class ProcessFlightView(CreateView):
 
 #
 class ProcessFlightDeletion(DeleteView):
-    # template_name = None;
     success_url = '/dashboard/'
     model = Flight
 
@@ -83,14 +82,14 @@ class ProcessFlightUpdate(UpdateView):
         leg_formset = context['flight_legs']
 
         if leg_formset.is_valid():
-            #First save the form to get the model objects
+            # First save the form to get the model objects
             flight = form.save()
 
-            #Asociate logged user to flight
+            # Asociate logged user to flight
             flight.user = self.request.user
             flight.save()
 
-            #Asociate fomset to flight
+            # Asociate fomset to flight
             leg_formset.instance = flight
             leg_formset.save()
             # TODO Use Reverse
