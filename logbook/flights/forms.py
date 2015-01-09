@@ -6,8 +6,7 @@ FlightLegFormset = inlineformset_factory(Flight, FlightLeg, max_num=1)
 
 
 class FlightEntryForm(ModelForm):
-    number = forms.CharField(max_length=254, widget=forms.TextInput(attrs={'placeholder': 'Flight Number'}))
-
+    number = forms.CharField(max_length=254, widget=forms.TextInput(attrs={'placeholder': 'Flight #'}))
 
     class Meta:
             model = Flight

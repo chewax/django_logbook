@@ -42,18 +42,13 @@
                         <td>{{flight.flight_time}}</td>
                         <td class="hide-tablet">{{flight.flight_service_time}}</td>
                         <td>
-                            <a class="hide-tablet" title="More..." href="#">
-                                <i class="fa fa-ellipsis-h fa-lg"></i>
-                            </a>
-                            &nbsp;
-                            <a title="Edit Trip" href="#">
+                            <a title="Update Trip" href="/flights/update/{{ flight.pk }}">
                                 <i class="fa fa-pencil fa-lg"></i>
                             </a>
                             &nbsp;
-                            <a title="Delete" class="hide-tablet" href="#">
+                            <a title="Delete" class="hide-tablet" href="/flights/delete/{{ flight.pk }}">
                                 <i class="fa fa-close fa-lg"></i>
                             </a>
-
                         </td>
                     </tr>
                 {% endfor %}

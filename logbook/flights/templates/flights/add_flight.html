@@ -27,8 +27,8 @@
                 </table>
             </div>
             <div class="leg-control">
-                <div class="button" id="add_more"><i class="fa fa-plus fa-lg"></i></div>
                 <div class="button" id="remove_row"><i class="fa fa-minus fa-lg"></i></div>
+                <div class="button" id="add_more"><i class="fa fa-plus fa-lg"></i></div>
             </div>
             <div class="flight-legs">
                 {{ flight_legs.management_form }}
@@ -66,6 +66,7 @@
                         </tr>
                     {% endfor %}
                 </table>
+            <input type="submit" class="form-button" id="leg-submit" value="Insert">
         </form>
     </div>
 {% endblock %}
