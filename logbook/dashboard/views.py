@@ -7,10 +7,11 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from datetime import timedelta, datetime
 import json
 
+from core.views import CurrencyAsideMixin
 from flights.models import Flight
 
 
-class DashboardProcessView(TemplateView):
+class DashboardProcessView(TemplateView, CurrencyAsideMixin):
     template_name = 'dashboard/dashboard.html'
 
     def get_context_data(self, **kwargs):
@@ -44,7 +45,7 @@ class DashboardProcessView(TemplateView):
             result_set = Flight.objects.filter(user=user)
 
         # Add Pagination
-        paginator = Paginator(result_set, 14) #Show 15 Flights
+        paginator = Paginator(result_set, 13) #Show 15 Flights
         page = self.request.GET.get('page')
         try:
             flights = paginator.page(page)

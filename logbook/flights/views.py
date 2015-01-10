@@ -11,7 +11,6 @@ class ProcessFlightView(CreateView):
     template_name = 'flights/add_flight.html'
     success_url = '/flights/new'
 
-
     def get_context_data(self, **kwargs):
         """
         Add inline formset (Flight Legs) to context data
@@ -24,7 +23,6 @@ class ProcessFlightView(CreateView):
         else:
             context['flight_legs'] = FlightLegFormset()
         return context
-
 
     def form_valid(self, form):
         """
@@ -52,7 +50,7 @@ class ProcessFlightView(CreateView):
         else:
             return self.render_to_response(self.get_context_data(form=form))
 
-#
+
 class ProcessFlightDeletion(DeleteView):
     success_url = '/dashboard/'
     model = Flight
@@ -71,7 +69,8 @@ class ProcessFlightUpdate(UpdateView):
         """
         context = super(ProcessFlightUpdate, self).get_context_data(**kwargs)
         if self.request.POST:
-            context['flight_legs'] = FlightLegFormset(self.request.POST, instance=self.object)
+            context['flight_legs'] = FlightLegFormset(self.request.POST,
+                                                      instance=self.object)
         else:
             context['flight_legs'] = FlightLegFormset(instance=self.object)
             print(self.object)
