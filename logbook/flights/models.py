@@ -1,4 +1,3 @@
-from django.contrib.auth.models import AnonymousUser
 from django.db import models
 from datetime import timedelta
 

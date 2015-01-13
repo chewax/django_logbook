@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractUser
+from user_settings.models import UserSettings
 
 
 class SimpleModelMixin(models.Model):
@@ -33,8 +34,7 @@ class UserManager(BaseUserManager):
 
         user = self.model(username=username, email=email)
         user.set_password(password)
-        print('sent password = {}'.format(password))
-        print('saved password = {}'.format(user.password))
+
         user.save(using=self._db)
 
         return user
@@ -43,7 +43,9 @@ class UserManager(BaseUserManager):
         email = UserManager.normalize_email(email)
         user = self.create_user(username, email, password)
         user.is_superuser = True
+
         user.save(using=self._db)
+
         return user
 
 
@@ -59,6 +61,9 @@ class User(AbstractUser):
     licences = models.ManyToManyField(License, blank=True, null=True)
     ratings = models.ManyToManyField(Rating, blank=True, null=True)
 
+    settings = models.OneToOneField(UserSettings, null=True,
+                                    related_name='user_settings')
+
     objects = UserManager()
 
     def __unicode__(self):
@@ -73,3 +78,9 @@ class User(AbstractUser):
             return super(User).get_full_name()
         else:
             return self.username
+
+    def clean(self):
+        # Assign settings to user
+        self.settings = UserSettings.objects.get_or_create(name=self.username)
+        self.save()
+        return super(User, self).clean()

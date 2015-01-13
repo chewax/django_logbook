@@ -1,11 +1,12 @@
 from django.shortcuts import redirect
 from django.views.generic import CreateView, DeleteView, UpdateView
+from core.views import CurrencyAsideMixin
 
 from flights.forms import FlightEntryForm, FlightLegFormset
 from flights.models import Flight
 
 
-class ProcessFlightView(CreateView):
+class ProcessFlightView(CreateView, CurrencyAsideMixin):
     form_class = FlightEntryForm
     # TODO Use Reverse
     template_name = 'flights/add_flight.html'
@@ -51,12 +52,12 @@ class ProcessFlightView(CreateView):
             return self.render_to_response(self.get_context_data(form=form))
 
 
-class ProcessFlightDeletion(DeleteView):
+class ProcessFlightDeletion(DeleteView, CurrencyAsideMixin):
     success_url = '/dashboard/'
     model = Flight
 
 
-class ProcessFlightUpdate(UpdateView):
+class ProcessFlightUpdate(UpdateView, CurrencyAsideMixin):
     success_url = '/dashboard/'
     form_class = FlightEntryForm
     model = Flight

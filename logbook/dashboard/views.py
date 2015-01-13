@@ -4,11 +4,13 @@ from django.views.generic import View
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+
 from datetime import timedelta, datetime
 import json
 
 from core.views import CurrencyAsideMixin
 from flights.models import Flight
+from user_settings.models import UserSettings
 
 
 class DashboardProcessView(TemplateView, CurrencyAsideMixin):
@@ -75,9 +77,6 @@ class FlightData(View):
         data = []
         accumulated_time = 0
 
-        #TODO Retrieve this values from user settings
-        limit = 90
-
         # Get all flights
         for flight in Flight.objects.filter(user=self.request.user).\
                 order_by('flightleg__time_out'):
@@ -86,7 +85,7 @@ class FlightData(View):
             data.append({
                 "date": flight.date.isoformat(),
                 "time": accumulated_time,
-                "limit": limit,
+                "limit": 0,
             })
         return data
 
@@ -97,8 +96,8 @@ class FlightData(View):
         """
         data = []
         accumulated_time = 0
-        #TODO Retrieve this values from user settings
-        limit = 120
+
+        limit = self.request.user.settings.max_on_30
 
         # Construct the starting date to be considered
         start_date = datetime.today() + timedelta(days=-30)
@@ -122,8 +121,8 @@ class FlightData(View):
         """
         data = []
         accumulated_time = 0
-        #TODO Retrieve this values from user settings
-        limit = 300
+
+        limit = self.request.user.settings.max_on_90
 
         # Construct the starting date to be considered
         start_date = datetime.today() + timedelta(days=-90)
@@ -147,8 +146,8 @@ class FlightData(View):
         """
         data = []
         accumulated_time = 0
-        #TODO Retrieve this values from user settings
-        limit = 1000
+
+        limit = self.request.user.settings.max_on_12m
 
         # Construct the starting date to be considered
         target_year = datetime.today().year - 1
@@ -174,11 +173,11 @@ class FlightData(View):
         """
         current_year = datetime.today().year
         current_month = datetime.today().month
-        data = []
 
+        data = []
         accumulated_time = 0
-        #TODO Retrieve this values from user settings
-        limit = 90
+
+        limit = self.request.user.settings.max_on_1m
 
         for flight in Flight.objects.filter(user=self.request.user).\
                 order_by('flightleg__time_out').\
@@ -204,8 +203,7 @@ class FlightData(View):
         data = []
 
         accumulated_time = 0
-        #TODO Retrieve this values from user settings
-        limit = 1000
+        limit = self.request.user.settings.max_on_1y
 
         for flight in Flight.objects.filter(user=self.request.user).\
                 order_by('flightleg__time_out').\
@@ -229,8 +227,7 @@ class FlightData(View):
         data = []
 
         accumulated_time = 0
-        #TODO Retrieve this values from user settings
-        limit = 1000
+        limit = self.request.user.settings.max_on_1y
 
         for flight in Flight.objects.filter(user=self.request.user).\
                 order_by('flightleg__time_out').\

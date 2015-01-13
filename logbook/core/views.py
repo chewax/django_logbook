@@ -72,7 +72,6 @@ class CurrencyCalculator():
 
         return accumulated_time
 
-
     def get_current_month(self, user):
         """
         Retrieves flown hours of current month. Accumulated
@@ -92,7 +91,6 @@ class CurrencyCalculator():
 
         return accumulated_time
 
-
     def get_last_calendar_year(self, user):
         """
         Retrieves flown hours of last calendar year. Accumulated
@@ -109,7 +107,6 @@ class CurrencyCalculator():
             accumulated_time += hours
 
         return accumulated_time
-
 
     def get_current_calendar_year(self, user):
         """
@@ -142,8 +139,6 @@ class CurrencyCalculator():
         return accumulated_time
 
 
-
-
 class CurrencyAsideMixin(ContextMixin):
     def get_currencies(self):
         currencies = []
@@ -161,7 +156,6 @@ class CurrencyAsideMixin(ContextMixin):
         currencies.append({
             "code": "total_last30",
             "name": "Last 30 days",
-            # "value": calc.get_last_x_days(30, user)
             "value": calc.get_flight_last_x_time(day_delta=30, user=user)
         })
 
@@ -169,7 +163,6 @@ class CurrencyAsideMixin(ContextMixin):
         currencies.append({
             "code": "total_last90",
             "name": "Last 90 days",
-            # "value": calc.get_last_x_days(90, user)
             "value": calc.get_flight_last_x_time(day_delta=90, user=user)
         })
 
@@ -177,7 +170,6 @@ class CurrencyAsideMixin(ContextMixin):
         currencies.append({
             "code": "total_last_6m",
             "name": "Last 6 Months",
-            # "value": calc.get_last_x_months(6, user)
             "value": calc.get_flight_last_x_time(month_delta=6, user=user)
         })
 
@@ -185,7 +177,6 @@ class CurrencyAsideMixin(ContextMixin):
         currencies.append({
             "code": "total_last_12m",
             "name": "Last 12 Months",
-            # "value": calc.get_last_x_months(12, user)
             "value": calc.get_flight_last_x_time(month_delta=12, user=user)
         })
 
@@ -193,7 +184,6 @@ class CurrencyAsideMixin(ContextMixin):
         currencies.append({
             "code": "total_service_30d",
             "name": "Service Time in 30 Days",
-            # "value": calc.get_service_last_x_days(30, user)
             "value": calc.get_service_last_x_time(user=user, day_delta=30)
 
         })
@@ -202,7 +192,6 @@ class CurrencyAsideMixin(ContextMixin):
         currencies.append({
             "code": "total_service_90d",
             "name": "Service Time in 90 Days",
-            # "value": calc.get_service_last_x_days(90, user)
             "value": calc.get_service_last_x_time(user=user, day_delta=90)
         })
 
@@ -222,5 +211,3 @@ class CurrencyAsideMixin(ContextMixin):
         context = super(CurrencyAsideMixin, self).get_context_data(**kwargs)
         context['currencies'] = self.get_currencies()
         return context
-
-
