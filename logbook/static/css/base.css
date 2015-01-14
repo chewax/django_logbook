@@ -53,9 +53,9 @@ body {
     .content-wrapper {
       width: 100%; } }
 
-.login-wrapper {
+.login-wrapper, .register-wrapper {
   max-width: 300px;
-  padding: 13%;
+  padding: 7%;
   margin-left: auto;
   margin-right: auto; }
 
