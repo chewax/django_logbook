@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.views.generic import UpdateView
 from core.views import CurrencyAsideMixin
@@ -16,4 +17,4 @@ class ProcessSettingsView(UpdateView, CurrencyAsideMixin):
         if user.settings.pk == int(kwargs['pk']):
             return super(ProcessSettingsView, self).get(request, *args, **kwargs)
         else:
-            return redirect('/settings/update/{}'.format(user.settings.pk))
+            return redirect(reverse('settings:user_settings', kwargs={'pk':user.settings.pk}))

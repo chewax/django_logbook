@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.views.generic import CreateView, DeleteView, UpdateView
 from core.views import CurrencyAsideMixin
@@ -46,8 +47,7 @@ class ProcessFlightView(CreateView, CurrencyAsideMixin):
             #Asociate fomset to flight
             leg_formset.instance = flight
             leg_formset.save()
-            # TODO Use Reverse
-            return redirect('/flights/new')
+            return redirect(reverse('flights:new'))
         else:
             return self.render_to_response(self.get_context_data(form=form))
 
@@ -92,7 +92,6 @@ class ProcessFlightUpdate(UpdateView, CurrencyAsideMixin):
             # Asociate fomset to flight
             leg_formset.instance = flight
             leg_formset.save()
-            # TODO Use Reverse
-            return redirect('/dashboard/')
+            return redirect(reverse('dashboard:user_dashboard'))
         else:
             return self.render_to_response(self.get_context_data(form=form))
