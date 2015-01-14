@@ -81,6 +81,6 @@ class User(AbstractUser):
 
     def clean(self):
         # Assign settings to user
-        self.settings = UserSettings.objects.get_or_create(name=self.username)
+        self.settings = UserSettings.objects.get_or_create(name=self.username)[0]
         self.save()
         return super(User, self).clean()
