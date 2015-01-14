@@ -1,4 +1,4 @@
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import redirect
 from django.views.generic import CreateView, DeleteView, UpdateView
 from core.views import CurrencyAsideMixin
@@ -9,9 +9,8 @@ from flights.models import Flight
 
 class ProcessFlightView(CreateView, CurrencyAsideMixin):
     form_class = FlightEntryForm
-    # TODO Use Reverse
     template_name = 'flights/add_flight.html'
-    success_url = '/flights/new'
+    success_url = reverse_lazy('flights:new')
 
     def get_context_data(self, **kwargs):
         """
@@ -53,12 +52,12 @@ class ProcessFlightView(CreateView, CurrencyAsideMixin):
 
 
 class ProcessFlightDeletion(DeleteView, CurrencyAsideMixin):
-    success_url = '/dashboard/'
+    success_url = reverse_lazy('dashboard:user_dashboard')
     model = Flight
 
 
 class ProcessFlightUpdate(UpdateView, CurrencyAsideMixin):
-    success_url = '/dashboard/'
+    success_url = reverse_lazy('dashboard:user_dashboard')
     form_class = FlightEntryForm
     model = Flight
 

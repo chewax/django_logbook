@@ -1,4 +1,4 @@
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import redirect
 from django.views.generic import FormView, TemplateView
 from django.contrib.auth import authenticate, login
@@ -12,7 +12,7 @@ class LoginUserView(FormView):
 
     template_name = 'accounts/login.html'
     form_class = AuthenticateUserForm
-    success_url = 'dashboard/'
+    success_url = reverse_lazy('dashboard:user_dashboard')
 
     def get(self, request, *args, **kwargs):
         user = request.user
@@ -32,7 +32,7 @@ class LoginUserView(FormView):
 class RegisterUserView(FormView):
     template_name = 'accounts/register.html'
     form_class = RegisterUserForm
-    success_url = '/'
+    success_url = reverse_lazy('pages:home')
 
     def form_valid(self, form):
         # Register the new user
