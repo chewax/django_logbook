@@ -9,6 +9,7 @@
             <tr>
                 <td>{{ aircraft.reg_number }}</td>
                 <td>{{ aircraft.model }}</td>
+                <td>{{ aircraft.markings }}</td>
                 <td><a href="/aircrafts/update/{{ aircraft.pk }}">update</a> </td>
                 <td><a href="/aircrafts/delete/{{ aircraft.pk }}">delete</a> </td>
         {% empty %}

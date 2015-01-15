@@ -3,12 +3,14 @@ from datetime import timedelta
 
 from accounts.models import User
 from aircrafts.models import Aircraft
+from crews.models import CrewMember
 
 
 class Flight(models.Model):
     user = models.ForeignKey(User, null=True)
     number = models.CharField(max_length=10, blank=True)
     aircraft = models.ForeignKey(Aircraft)
+    crew_list = models.ManyToManyField(CrewMember, blank=True, null=True)
 
     DUTY_CHOICES = (
         ('FLY', 'Fly'),
@@ -23,10 +25,13 @@ class Flight(models.Model):
     ROLE_CHOICES = (
         ('PIC', 'Pilot in command'),
         ('SIC', 'Second in command'),
+        ('INT', 'Instructor'),
+        ('INP', 'Inspector'),
         ('ENG', 'Engineer'),
         ('NAV', 'Navigator'),
         ('CCR', 'Cabin Crew'),
     )
+
     # PIC/SIC/ENG/NAV/CCREW
     role = models.CharField(max_length=4, blank=True,
                             default="PIC", choices=ROLE_CHOICES)

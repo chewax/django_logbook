@@ -1,0 +1,26 @@
+{% extends "accounts/base.html" %}
+{% load static from staticfiles %}
+
+{% block content %}
+    <h1>Crews</h1>
+    <a href="/crews/new">new</a>
+    <table>
+        {% for crew_member in crewmember_list %}
+            <tr>
+                <td>{{ crew_member.first_name }}</td>
+                <td>{{ crew_member.last_name }}</td>
+                <td>{{ crew_member.role }}</td>
+                <td>{{ crew_member.phone_number }}</td>
+                <td>{{ crew_member.address }}</td>
+                <td>{{ crew_member.email }}</td>
+                <td>{{ crew_member.company }}</td>
+
+                <td><a href="/crews/update/{{ crew_member.pk }}">update</a> </td>
+                <td><a href="/crews/delete/{{ crew_member.pk }}">delete</a> </td>
+        {% empty %}
+            <td>No crews yet.<td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

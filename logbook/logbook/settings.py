@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'widget_tweaks',
     'social_auth',
     'user_settings',
+    'crews',
 
 )
 
