@@ -4,6 +4,21 @@
 {% block content %}
     <div class="content">
         <div class="search-box">
+            <div class="pagination">
+                <span class="step-links">
+                    {% if flights.has_previous %}
+                        <a href="?page={{ flights.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        page {{ flights.number }} of {{ flights.paginator.num_pages }}.
+                    </span>
+
+                    {% if flights.has_next %}
+                        <a href="?page={{ flights.next_page_number }}">next</a>
+                    {% endif %}
+                </span>
+            </div>
             <form method="POST" action="/dashboard/" id="search-form">
                 {% csrf_token %}
                 <input type="text" name="query_input" id="search-input">
@@ -58,23 +73,6 @@
                     </tr>
                 {% endfor %}
             </table>
-        </div>
-        <div class="pagination-wrapper">
-            <div class="pagination">
-                <span class="step-links">
-                    {% if flights.has_previous %}
-                        <a href="?page={{ flights.previous_page_number }}">previous</a>
-                    {% endif %}
-
-                    <span class="current">
-                        page {{ flights.number }} of {{ flights.paginator.num_pages }}.
-                    </span>
-
-                    {% if flights.has_next %}
-                        <a href="?page={{ flights.next_page_number }}">next</a>
-                    {% endif %}
-                </span>
-            </div>
         </div>
     </div>
     <div class="footer">

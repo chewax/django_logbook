@@ -47,7 +47,7 @@ class DashboardProcessView(TemplateView, CurrencyAsideMixin):
             result_set = Flight.objects.filter(user=user)
 
         # Add Pagination
-        paginator = Paginator(result_set, 13) #Show 15 Flights
+        paginator = Paginator(result_set, 25) #Show 25 Flights
         page = self.request.GET.get('page')
         try:
             flights = paginator.page(page)
