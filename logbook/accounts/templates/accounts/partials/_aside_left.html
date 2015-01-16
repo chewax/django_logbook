@@ -1,3 +1,19 @@
-{% for currency in currencies %}
-    {{ currency.name }}:{{ currency.value }}<br>
-{% endfor %}
+<div class="aside-wrapper">
+    <div class="currency-wrapper">
+        {% for currency in currencies %}
+            <div class="currency">
+                <span class="currency-name">{{ currency.name }}</span>
+                <span class="currency-value {{ currency.class }}">{{ currency.value }}</span>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="aside-footer">
+        <a href="#">
+            <span class="fa-stack fa-lg pull-right add-currency">
+                <i class="fa fa-circle-o fa-stack-2x"></i>
+                <i class="fa fa-plus fa-stack-1x"></i>
+            </span>
+        </a>
+    </div>
+</div>

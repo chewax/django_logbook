@@ -24,8 +24,12 @@
                     <th>Flight Time</th>
                     <th class="hide-tablet">Service Time</th>
                     <th>
-                        <a class="add-cross" href="/flights/new">
-                            <i class="fa fa-plus fa-lg"></i>
+                        <a class="add-flight" href="/flights/new">
+{#                            <i class="fa fa-plus fa-lg"></i>#}
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle-o fa-stack-2x"></i>
+                                <i class="fa fa-plus fa-stack-1x"></i>
+                            </span>
                         </a>
                     </th>
                 </tr>
@@ -43,11 +47,12 @@
                         <td class="hide-tablet">{{flight.flight_service_time}}</td>
                         <td>
                             <a title="Update Trip" href="/flights/update/{{ flight.pk }}">
-                                <i class="fa fa-pencil fa-lg"></i>
+                                <i class="fa fa-pencil fa-lg upsert-flight"></i>
                             </a>
                             &nbsp;
+
                             <a title="Delete" class="hide-tablet" href="/flights/delete/{{ flight.pk }}">
-                                <i class="fa fa-close fa-lg"></i>
+                                <i class="fa fa-close fa-lg upsert-flight"></i>
                             </a>
                         </td>
                     </tr>
@@ -62,7 +67,7 @@
                     {% endif %}
 
                     <span class="current">
-                        Page {{ flights.number }} of {{ flights.paginator.num_pages }}.
+                        page {{ flights.number }} of {{ flights.paginator.num_pages }}.
                     </span>
 
                     {% if flights.has_next %}

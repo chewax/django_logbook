@@ -43,6 +43,10 @@ class UserSettings(models.Model):
                                          verbose_name="Maximum service hours "
                                                       "per month")
 
+    max_service_3m = models.IntegerField(default=400,
+                                         verbose_name="Maximum service hours "
+                                                      "per 3 month")
+
     max_service_1y = models.IntegerField(default=150,
                                          verbose_name="Maximum service hours "
                                                       "per year")

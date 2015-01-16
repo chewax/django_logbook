@@ -32,6 +32,7 @@ class CurrencyCalculator():
         :return: Integer Time
         """
         accumulated_time = 0
+
         # Construct the starting date to be considered
 
         start_date = datetime.today()
@@ -145,61 +146,114 @@ class CurrencyAsideMixin(ContextMixin):
         user = get_user(self.request)
         calc = CurrencyCalculator()
 
+        def get_classes(accumulated, limit):
+            pj = (accumulated * 100) / limit
+
+            if pj < 50:
+                return "currency-ok"
+            elif pj < 70:
+                return "currency-warning"
+            elif pj < 100:
+                return "currency-attention"
+            else:
+                return "currency-violation"
+
         # TOTAL HOURS
+        accum = calc.get_all_time_data(user)
+        limit = -1
         currencies.append({
             "code": "total_hours",
-            "name": "Total Hours",
-            "value": calc.get_all_time_data(user)
+            "name": "Total",
+            "value": accum,
+            "limit": limit,
+            "class": get_classes(accum, limit),
+            "tooltip": "All time flown hours"
         })
 
         # TOTAL LAST 30 DAYS
+        accum = calc.get_flight_last_x_time(day_delta=30, user=user)
+        limit = self.request.user.settings.max_on_30
         currencies.append({
             "code": "total_last30",
-            "name": "Last 30 days",
-            "value": calc.get_flight_last_x_time(day_delta=30, user=user)
+            "name": "30 days",
+            "value": accum,
+            "limit": limit,
+            "class": get_classes(accum, limit),
+            "tooltip": "Hours flown in last 30 days"
         })
 
         # TOTAL LAST 90 DAYS
+        accum = calc.get_flight_last_x_time(day_delta=90, user=user)
+        limit = self.request.user.settings.max_on_90
         currencies.append({
             "code": "total_last90",
-            "name": "Last 90 days",
-            "value": calc.get_flight_last_x_time(day_delta=90, user=user)
+            "name": "90 days",
+            "value": accum,
+            "limit": limit,
+            "class": get_classes(accum, limit),
+            "tooltip": "Hours flown in last 90 days"
         })
 
         # TOTAL LAST 6 MONTHS
+        accum = calc.get_flight_last_x_time(month_delta=6, user=user)
+        limit = self.request.user.settings.max_on_6m
         currencies.append({
             "code": "total_last_6m",
-            "name": "Last 6 Months",
-            "value": calc.get_flight_last_x_time(month_delta=6, user=user)
+            "name": "6 Months",
+            "value": accum,
+            "limit": limit,
+            "class": get_classes(accum, limit),
+            "tooltip": "Hours flown in last 6 months"
         })
 
         # TOTAL LAST 12 MONTHS
+        accum = calc.get_flight_last_x_time(month_delta=12, user=user)
+        limit = self.request.user.settings.max_on_12m
         currencies.append({
             "code": "total_last_12m",
-            "name": "Last 12 Months",
-            "value": calc.get_flight_last_x_time(month_delta=12, user=user)
+            "name": "12 Months",
+            "value": accum,
+            "limit": limit,
+            "class": get_classes(accum, limit),
+            "tooltip": "Hours flown in last 12 months"
         })
 
         # TOTAL SERVICE TIME 30 DAYS
+        accum = calc.get_service_last_x_time(user=user, day_delta=30)
+        limit = self.request.user.settings.max_service_1m
         currencies.append({
             "code": "total_service_30d",
-            "name": "Service Time in 30 Days",
-            "value": calc.get_service_last_x_time(user=user, day_delta=30)
+            "name": "Service 30 Days",
+            "value": accum,
+            "limit": limit,
+            "class": get_classes(accum, limit),
+            "tooltip": "Service time in last 30 days"
 
         })
 
         # TOTAL SERVICE TIME 90 DAYS
+        accum = calc.get_service_last_x_time(user=user, day_delta=90)
+        limit = self.request.user.settings.max_service_3m
         currencies.append({
             "code": "total_service_90d",
-            "name": "Service Time in 90 Days",
-            "value": calc.get_service_last_x_time(user=user, day_delta=90)
+            "name": "Service 90 Days",
+            "value": accum,
+            "limit": limit,
+            "class": get_classes(accum, limit),
+            "tooltip": "Service time in last 90 days"
         })
 
         # TOTAL BY TYPE
+        accum = calc.get_all_time_data(user)
+        limit = -1
         currencies.append({
             "code": "total_b763",
-            "name": "Total in B763",
-            "value": calc.get_total_by_type(user, 'B763', 90)
+            "name": "B763",
+            "value": accum,
+            "limit": limit,
+            "class": get_classes(accum, limit),
+            "tooltip": "Total hours flown in type"
+
         })
 
         # TOTAL VFR
