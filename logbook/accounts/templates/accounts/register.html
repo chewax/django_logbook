@@ -10,16 +10,16 @@
     <div class="register-wrapper">
 
             <form class="register-form" method="post" action="/accounts/register">
-                <div class="register-card media-card-div">
+                <div class="register-card card">
                 {{ form.non_field_errors }}
                 {% csrf_token %}
                     {% for field in form %}
-                        <div class="field media-input">
+                        <div class="media-input">
                             {{ field.errors }}
                             {{ field.label_tag }}{{ field }}
                         </div>
                     {% endfor %}
-                     <div class="field"><button class="media-button" type="submit">Register</button></div>
+                     <div class="field"><button type="submit">Register</button></div>
                 </div>
             </form>
 

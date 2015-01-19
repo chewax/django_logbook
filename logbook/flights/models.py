@@ -10,7 +10,7 @@ class Flight(models.Model):
     user = models.ForeignKey(User, null=True)
     number = models.CharField(max_length=10, blank=True)
     aircraft = models.ForeignKey(Aircraft)
-    crew_list = models.ManyToManyField(CrewMember, blank=True, null=True)
+    crew_list = models.ManyToManyField(CrewMember, blank=True, null=True, verbose_name="Crew")
 
     DUTY_CHOICES = (
         ('FLY', 'Fly'),

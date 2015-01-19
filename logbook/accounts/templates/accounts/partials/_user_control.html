@@ -2,16 +2,16 @@
     {% if user.is_authenticated %}
             <div class="menu-text">
                 <a href="/logout">
-                    <div class="menu-item"><i class="fa fa-user fa-3x"></i></div>
-                    Logout
+                    <div class="menu-item"><i class="fa fa-user fa-3x"></i><br>Logout</div>
+
                 </a>
             </div>
     {% else %}
 
         <div class="menu-text">
             <a href="/login">
-                <div class="menu-item"><i class="fa fa-user fa-3x"></i></div>
-                Login
+                <div class="menu-item"><i class="fa fa-user fa-3x"></i><br>Login</div>
+
             </a>
         </div>
     {% endif %}

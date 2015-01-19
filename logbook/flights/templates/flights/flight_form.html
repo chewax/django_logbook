@@ -16,7 +16,7 @@
                 <table>
                 {% for field in form %}
                     <tr>
-                        <div class="form-field">
+                        <div>
                             {% if field.errors %}
                                 <div class="field-error">{{ field.errors }}</div>
                             {% endif %}
@@ -28,8 +28,8 @@
                 </table>
             </div>
             <div class="leg-control">
-                <div class="button" id="remove_row"><i class="fa fa-minus"></i></div>
-                <div class="button" id="add_more"><i class="fa fa-plus"></i></div>
+                <div class="simple-button" id="remove_row"><i class="fa fa-minus"></i></div>
+                <div class="simple-button" id="add_more"><i class="fa fa-plus"></i></div>
             </div>
             <div class="flight-legs">
                 {{ flight_legs.management_form }}
