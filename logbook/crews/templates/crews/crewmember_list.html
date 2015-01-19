@@ -2,11 +2,49 @@
 {% load static from staticfiles %}
 
 {% block content %}
-    <h1>Crews</h1>
-    <a href="/crews/new">new</a>
-    <table>
+    <div class="search-box">
+            <div class="pagination">
+                <span class="step-links">
+                    {% if flights.has_previous %}
+                        <a href="?page={{ flights.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        page {{ flights.number }} of {{ flights.paginator.num_pages }}.
+                    </span>
+
+                    {% if flights.has_next %}
+                        <a href="?page={{ flights.next_page_number }}">next</a>
+                    {% endif %}
+                </span>
+            </div>
+            <form method="POST" action="/dashboard/" id="search-form">
+                {% csrf_token %}
+                <input type="text" name="query_input" id="search-input">
+                <button class="button" type="submit" name="dashboard_btn_search">Search</button>
+            </form>
+    </div>
+    <table class="dashboard-table">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Role</th>
+            <th>Phone Number</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th>Company</th>
+            <th></th>
+            <th>
+                <a href="/crews/new">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle-o fa-stack-2x"></i>
+                        <i class="fa fa-plus fa-stack-1x"></i>
+                    </span>
+                </a>
+            </th>
+        </tr>
         {% for crew_member in crewmember_list %}
-            <tr>
+            <tr class="rows {{forloop.counter|divisibleby:2|yesno:"row-even,row-odd"}}">
                 <td>{{ crew_member.first_name }}</td>
                 <td>{{ crew_member.last_name }}</td>
                 <td>{{ crew_member.role }}</td>
@@ -15,12 +53,11 @@
                 <td>{{ crew_member.email }}</td>
                 <td>{{ crew_member.company }}</td>
 
-                <td><a href="/crews/update/{{ crew_member.pk }}">update</a> </td>
-                <td><a href="/crews/delete/{{ crew_member.pk }}">delete</a> </td>
+                <td><a href="/crews/update/{{ crew_member.pk }}"><i class="fa fa-pencil fa-lg upsert-flight"></i></a> </td>
+                <td><a href="/crews/delete/{{ crew_member.pk }}"><i class="fa fa-close fa-lg upsert-flight"></i></a> </td>
         {% empty %}
             <td>No crews yet.<td>
             </tr>
         {% endfor %}
     </table>
-
 {% endblock %}

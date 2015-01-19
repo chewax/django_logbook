@@ -2,18 +2,52 @@
 {% load static from staticfiles %}
 
 {% block content %}
-    <h1>Aircrafts</h1>
-    <a href="/aircrafts/new">new</a>
-    <table>
+    <div class="search-box">
+            <div class="pagination">
+                <span class="step-links">
+                    {% if aircrafts.has_previous %}
+                        <a href="?page={{ aircrafts.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        page {{ aircrafts.number }} of {{ aircrafts.paginator.num_pages }}.
+                    </span>
+
+                    {% if aircrafts.has_next %}
+                        <a href="?page={{ aircrafts.next_page_number }}">next</a>
+                    {% endif %}
+                </span>
+            </div>
+            <form method="POST" id="search-form">
+                {% csrf_token %}
+                <input type="text" name="query_input" id="search-input">
+                <button class="button" type="submit" name="dashboard_btn_search">Search</button>
+            </form>
+    </div>
+    <table class="dashboard-table">
+        <tr>
+{#            <th></th>#}
+            <th>Registration</th>
+            <th>Type</th>
+            <th>Markings</th>
+            <th></th>
+            <th><a href="/aircrafts/new">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle-o fa-stack-2x"></i>
+                        <i class="fa fa-plus fa-stack-1x"></i>
+                    </span>
+                </a>
+            </th>
+        </tr>
         {% for aircraft in aircraft_list %}
-            <tr>
+            <tr class="rows {{forloop.counter|divisibleby:2|yesno:"row-even,row-odd"}}">
                 <td>{{ aircraft.reg_number }}</td>
                 <td>{{ aircraft.model }}</td>
                 <td>{{ aircraft.markings }}</td>
-                <td><a href="/aircrafts/update/{{ aircraft.pk }}">update</a> </td>
-                <td><a href="/aircrafts/delete/{{ aircraft.pk }}">delete</a> </td>
+                <td><a href="/aircrafts/update/{{ aircraft.pk }}"><i class="fa fa-pencil fa-lg upsert-flight"></i></a> </td>
+                <td><a href="/aircrafts/delete/{{ aircraft.pk }}"><i class="fa fa-close fa-lg upsert-flight"></i></a> </td>
         {% empty %}
-            <td>No articles yet.<td>
+            <td>No aircraft yet.<td>
             </tr>
         {% endfor %}
     </table>

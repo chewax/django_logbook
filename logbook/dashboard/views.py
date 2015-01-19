@@ -10,7 +10,6 @@ import json
 
 from core.views import CurrencyAsideMixin
 from flights.models import Flight
-from user_settings.models import UserSettings
 
 
 class DashboardProcessView(TemplateView, CurrencyAsideMixin):

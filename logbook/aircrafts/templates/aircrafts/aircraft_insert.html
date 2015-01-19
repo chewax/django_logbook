@@ -3,7 +3,22 @@
 
 {% block content %}
     <form action="" method="post">{% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Insert" />
+        <table>
+            {% for field in form %}
+                <tr>
+                    <div class="form-field">
+                        {% if field.errors %}
+                            <div class="field-error">{{ field.errors }}</div>
+                        {% endif %}
+                        <td><div class="form-field-title">{{ field.label | title}} </div></td>
+                        <td><div class="form-field">{{ field }} </div></td>
+                    </div>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td><input type="submit" class="form-button"  value="Insert"></td>
+            </tr>
+        </table>
     </form>
 {% endblock %}

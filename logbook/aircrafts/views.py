@@ -1,4 +1,6 @@
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.core.urlresolvers import reverse_lazy
+from django.db.models import Q
 from django.views.generic import CreateView, DeleteView, UpdateView, ListView
 
 from core.views import CurrencyAsideMixin

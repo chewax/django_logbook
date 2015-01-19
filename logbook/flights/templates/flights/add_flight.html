@@ -19,7 +19,7 @@
                             {% if field.errors %}
                                 <div class="field-error">{{ field.errors }}</div>
                             {% endif %}
-                            <td><div class="form-field-title">{{ field.name | title}} </div></td>
+                            <td><div class="form-field-title">{{ field.label | title}} </div></td>
                             <td><div class="form-field">{{ field }} </div></td>
                         </div>
                     </tr>
